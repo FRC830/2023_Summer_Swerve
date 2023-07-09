@@ -9,6 +9,7 @@ struct SwerveConfig;
 class SwerveDrive 
 {
     public:
+        virtual void Configure(SwerveConfig &config) = 0;
         virtual bool GetEbrake() = 0;
         virtual void SetEbrake(bool ebrake) = 0;
         virtual void Drive(frc::Translation2d position, double rotation) = 0;
