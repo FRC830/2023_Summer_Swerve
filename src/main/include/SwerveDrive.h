@@ -14,7 +14,7 @@ class SwerveDrive
         virtual void Configure(SwerveConfig &config) = 0;
         virtual bool GetEbrake() = 0;
         virtual void SetEbrake(bool ebrake) = 0;
-        virtual void Drive(double x_position, double y_position, double rotation) = 0;
+        //virtual void Drive(double x_position, double y_position, double rotation) = 0;
         virtual void Drive(double vx, double vy, double omega) = 0;
         virtual void Drive(frc::ChassisSpeeds speed) = 0;
         virtual void Drive(std::vector<frc::SwerveModuleState> &state) = 0;

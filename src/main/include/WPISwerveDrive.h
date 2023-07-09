@@ -7,11 +7,11 @@ struct SwerveConfig{
     bool orientation;
     double maxDriveSpeed;
     double maxTurnSpeed;
-    //location of motors relative to the centor of the robot
- 
-
-
-
+    //location of motors relative to the center of the robot
+    frc::Translation2d m_frontLeftLocation;
+    frc::Translation2d m_frontRightLocation;
+    frc::Translation2d m_backLeftLocation;
+    frc::Translation2d m_backRightLocation;
 };
 
 class WPISwerveDrive : public SwerveDrive
@@ -20,7 +20,7 @@ class WPISwerveDrive : public SwerveDrive
         virtual void Configure(SwerveConfig &config) = 0;
         virtual bool GetEbrake() override;
         virtual void SetEbrake(bool ebrake) override;
-        virtual void Drive(double x_position, double y_position, double rotation);
+        // virtual void Drive(double x_position, double y_position, double rotation);
         virtual void Drive(double vx, double vy, double omega) override;
         virtual void Drive(frc::ChassisSpeeds speed) override;
         virtual void Drive(std::vector<frc::SwerveModuleState> &state) override;
@@ -34,13 +34,11 @@ class WPISwerveDrive : public SwerveDrive
 
     private:
 
-        frc::Translation2d m_frontLeftLocation{0.381_m, 0.381_m};
-        frc::Translation2d m_frontRightLocation{0.381_m, -0.381_m};
-        frc::Translation2d m_backLeftLocation{-0.381_m, 0.381_m};
-        frc::Translation2d m_backRightLocation{-0.381_m, -0.381_m};
-        frc::SwerveDriveKinematics<4> m_kinematics{
-        m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation,
-        m_backRightLocation};
+        frc::Translation2d m_frontLeftLocation;
+        frc::Translation2d m_frontRightLocation;
+        frc::Translation2d m_backLeftLocation;
+        frc::Translation2d m_backRightLocation;
+        
 
         std::vector<frc::SwerveModuleState> states;
         

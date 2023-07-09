@@ -6,7 +6,10 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     m_maxDriveSpeed = config.maxDriveSpeed;
     m_maxTurnSpeed = config.maxTurnSpeed;
     m_orientation = config.orientation;
-    
+    frc::Translation2d m_frontLeftLocation = config.frontLeftLocation;
+    frc::Translation2d m_frontRightLocation = config.frontRightLocation;
+    frc::Translation2d m_backLeftLocation = config.backLeftLocation;
+    frc::Translation2d m_backRightLocation = config.backRightLocation;
 
 }
 
@@ -17,11 +20,11 @@ bool WPISwerveDrive::GetEbrake() {
 void WPISwerveDrive::SetEbrake(bool ebrake) {
     m_ebrake = ebrake;
 }
-void WPISwerveDrive::Drive(double x_position, double y_position, double rotation) {
+// void WPISwerveDrive::Drive(double x_position, double y_position, double rotation) {
     
 
-    Drive(x_position * m_maxDriveSpeed, y_position * m_maxDriveSpeed, rotation * m_maxTurnSpeed);
-}
+//     Drive(x_position * m_maxDriveSpeed, y_position * m_maxDriveSpeed, rotation * m_maxTurnSpeed);
+// }
 void WPISwerveDrive::Drive(double vx, double vy, double omega) {
     
     Drive(frc::ChassisSpeeds((units::meters_per_second_t)vx, (units::meters_per_second_t)vy, (units::radians_per_second_t)omega));
@@ -34,6 +37,7 @@ void WPISwerveDrive::Drive(frc::ChassisSpeeds speed) {
     m_backRightLocation};
  
 
+    // states = m_kinematics.ToSwerveModuleStates(speed);
     auto [fl, fr, bl, br] = m_kinematics.ToSwerveModuleStates(speed);
     
     states.push_back(fl);
