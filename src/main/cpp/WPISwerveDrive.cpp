@@ -4,7 +4,7 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     
 }
 bool WPISwerveDrive::GetEbrake() {
-
+    return false;
 }
 void WPISwerveDrive::SetEbrake(bool ebrake) {
 
@@ -22,7 +22,7 @@ void WPISwerveDrive::Drive(std::vector<frc::SwerveModuleState> &state) {
 
 }
 bool WPISwerveDrive::GetIdleMode() {
-
+    return false;
 }
 void WPISwerveDrive::SetIdleMode(bool idle_mode) {
 

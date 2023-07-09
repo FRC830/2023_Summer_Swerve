@@ -20,5 +20,4 @@ class WPISwerveDrive : public SwerveDrive
         bool ebrake;
         bool orientation;
 
-
 };
