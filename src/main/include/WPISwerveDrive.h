@@ -51,5 +51,4 @@ class WPISwerveDrive : public SwerveDrive
         //false is robot orientated, true is FieldOrientated. 
         
 
-
 };

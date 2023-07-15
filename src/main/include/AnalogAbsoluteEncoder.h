@@ -1,5 +1,14 @@
 #pragma once
 #include "SwerveAbsoluteEncoder.h"
+#include <frc/AnalogEncoder.h>
+#include <math.h>
+
+struct AbsoluteEncoderConfig
+{
+    int port_number;
+    bool is_inverted;
+    frc::Rotation2d zero_heading;
+};
 
 class AnalogAbsoluteEncoder : public SwerveAbsoluteEncoder
 {
@@ -12,5 +21,7 @@ class AnalogAbsoluteEncoder : public SwerveAbsoluteEncoder
         virtual void SetZeroHeading(frc::Rotation2d zero_heading) override;
         
     private:
-
+        frc::AnalogEncoder *m_encoder;
+        bool m_is_inverted;
+        frc::Rotation2d m_zero_heading;
 };

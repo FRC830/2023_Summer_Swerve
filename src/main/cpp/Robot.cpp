@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "Robot.h"
-
 #include <fmt/core.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
@@ -55,9 +54,19 @@ void Robot::AutonomousPeriodic() {
   }
 }
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() 
+{
+  AbsoluteEncoderConfig config;
+  config.port_number = 2;
+  config.is_inverted = true;
+  m_back_left_analog_encoder.Configure(config);
+  m_back_left_analog_encoder.SetZeroHeading(m_back_left_analog_encoder.GetRawHeading());
+}
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() 
+{
+  std::cout << static_cast<double>(m_back_left_analog_encoder.GetHeading().Degrees()) << std::endl;
+}
 
 void Robot::DisabledInit() {}
 

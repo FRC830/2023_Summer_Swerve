@@ -52,7 +52,7 @@ void WPISwerveDrive::Drive(std::vector<frc::SwerveModuleState> &state) {
 
 } 
 bool WPISwerveDrive::GetIdleMode() {
-
+    return false;
 }
 void WPISwerveDrive::SetIdleMode(bool idle_mode) {
 
