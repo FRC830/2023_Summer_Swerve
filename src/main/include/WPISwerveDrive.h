@@ -8,10 +8,10 @@ struct SwerveConfig{
     double maxDriveSpeed;
     double maxTurnSpeed;
     //location of motors relative to the center of the robot
-    frc::Translation2d m_frontLeftLocation;
-    frc::Translation2d m_frontRightLocation;
-    frc::Translation2d m_backLeftLocation;
-    frc::Translation2d m_backRightLocation;
+    frc::Translation2d frontLeftLocation;
+    frc::Translation2d frontRightLocation;
+    frc::Translation2d backLeftLocation;
+    frc::Translation2d backRightLocation;
 };
 
 class WPISwerveDrive : public SwerveDrive
