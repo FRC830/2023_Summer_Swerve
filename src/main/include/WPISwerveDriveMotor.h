@@ -2,7 +2,6 @@
 #include "SwerveDriveMotor.h"
 
 struct SwerveDriveMotorConfig{
-    double desired_vel;
     bool inverted;
     bool idleMode;
 
@@ -19,7 +18,6 @@ public:
     virtual bool GetIdleMode() override;
 
 private:
-    double m_desired_vel;
     bool m_inverted;
     bool m_idleMode;
 
