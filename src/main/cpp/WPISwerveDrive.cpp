@@ -55,7 +55,7 @@ bool WPISwerveDrive::GetIdleMode() {
     return false;
 }
 void WPISwerveDrive::SetIdleMode(bool idle_mode) {
-    
+
 }
 void WPISwerveDrive::SetRobotOriented() {
     m_orientation = false;
