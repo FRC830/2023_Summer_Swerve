@@ -56,16 +56,23 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() 
 {
-  AbsoluteEncoderConfig config;
-  config.port_number = 2;
-  config.is_inverted = true;
-  m_back_left_analog_encoder.Configure(config);
+  // Absolute Encoder configuration
+  AbsoluteEncoderConfig absolute_encoder_config;
+  absolute_encoder_config.port_number = 2;
+  absolute_encoder_config.is_inverted = true;
+  m_back_left_analog_encoder.Configure(absolute_encoder_config);
   m_back_left_analog_encoder.SetZeroHeading(m_back_left_analog_encoder.GetRawHeading());
+
+  // NavX Gyro Configuration
+  GyroConfig gyro_config;
+  gyro_config.is_inverted = false;
+  gyro_config.zero_heading = units::degree_t(0);
+  gyro.Configure(gyro_config);
 }
 
 void Robot::TeleopPeriodic() 
 {
-  std::cout << static_cast<double>(m_back_left_analog_encoder.GetHeading().Degrees()) << std::endl;
+  std::cout << double(units::degree_t(gyro.GetYawPitchRoll().Z())) << std::endl;
 }
 
 void Robot::DisabledInit() {}

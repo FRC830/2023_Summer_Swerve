@@ -1,26 +1,25 @@
 #pragma once
+#include "SwerveGyro.h"
+#include <AHRS.h>
 
-
-
-struct AbsoluteEncoderConfig
+struct GyroConfig 
 {
-    int port_number;
     bool is_inverted;
     frc::Rotation2d zero_heading;
 };
 
-class AnalogAbsoluteEncoder : public SwerveAbsoluteEncoder
+class NavXGyro : public SwerveGyro
 {
     public:
-        virtual void Configure(AbsoluteEncoderConfig &config) override;
+        virtual void Configure(GyroConfig &config) override;
+        virtual frc::Rotation3d GetYawPitchRoll() override;
         virtual frc::Rotation2d GetHeading() override;
         virtual frc::Rotation2d GetRawHeading() override;
         virtual bool GetInverted() override;
         virtual void SetInverted(bool inverted) override;
-        virtual void SetZeroHeading(frc::Rotation2d zero_heading) override;
-        
+        virtual void SetZeroHeading(double zero_heading) override;
     private:
-        frc::AnalogEncoder *m_encoder;
         bool m_is_inverted;
         frc::Rotation2d m_zero_heading;
+        AHRS* m_gyro;
 };
