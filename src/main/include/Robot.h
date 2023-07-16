@@ -9,6 +9,7 @@
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include "AnalogAbsoluteEncoder.h"
+#include "NeoTurnMotor.h"
 #include <iostream> // For troubleshooting
 
 class Robot : public frc::TimedRobot {
@@ -32,4 +33,5 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
   AnalogAbsoluteEncoder m_back_left_analog_encoder;
+  NeoTurnMotor m_back_left_turn_motor;
 };
