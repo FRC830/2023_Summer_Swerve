@@ -9,20 +9,21 @@ void NeoTurnMotor::Configure(SwerveTurnMotorConfig &config){
     m_AbsouluteEncoder = config.absouluteEncoder;
     m_turn_motor = new rev::CANSparkMax(config.deviceID, rev::CANSparkMaxLowLevel::MotorType::kBrushless);
     //m_relative_Encoder = &m_turn_motor->GetEncoder();
-    //m_PID  = &m_turn_motor->GetPIDController();
+    auto pid = m_turn_motor->GetPIDController();
     m_turn_motor->SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
     SetInverted(config.inverted);
-    m_turn_motor->GetPIDController().SetP(1);
-    m_turn_motor->GetPIDController().SetD(0.1);
+    pid.SetP(1);
+    pid.SetD(0.1);
     m_turn_motor->BurnFlash();
-    
+};    
 
-} ;
+
 void NeoTurnMotor::SetRotation(frc::Rotation2d deg){
     frc::Rotation2d realTurn = deg - GetRotation();
     int turnTicks = static_cast<double>(realTurn.Degrees()) * ratio; 
-    int currentTicks = m_turn_motor->GetEncoder().GetPosition() * 42; 
-    m_turn_motor->GetEncoder().SetPosition(currentTicks+turnTicks);
+    auto encoder = m_turn_motor->GetEncoder();
+    int currentTicks = encoder.GetPosition() * 42; 
+    encoder.SetPosition(currentTicks+turnTicks);
 }; 
 frc::Rotation2d NeoTurnMotor::GetRotation(){
     return m_AbsouluteEncoder->GetHeading();

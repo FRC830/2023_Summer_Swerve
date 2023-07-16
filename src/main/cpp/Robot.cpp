@@ -64,7 +64,7 @@ void Robot::TeleopInit()
 
   SwerveTurnMotorConfig nConfig;
   nConfig.absouluteEncoder= &m_back_left_analog_encoder;
-  nConfig.deviceID = 2;
+  nConfig.deviceID = 4;
   nConfig.inverted = true;
   m_back_left_turn_motor.Configure(nConfig);
 
@@ -74,7 +74,7 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic() 
 {
   m_back_left_turn_motor.SetRotation(frc::Rotation2d(static_cast<units::degree_t>(frc::SmartDashboard::GetNumber("backleft turn motor position", 69))));
-  std::cout << "\rCurrent motor heading/positon:\t" << static_cast<double>(m_back_left_analog_encoder.GetHeading().Degrees()) << "\tsoftware motor positon" << frc::SmartDashboard::GetNumber("backleft turn motor position", 69);
+  //std::cout << "\rCurrent motor heading/positon:\t" << static_cast<double>(m_back_left_analog_encoder.GetHeading().Degrees()) << "\tsoftware motor positon" << frc::SmartDashboard::GetNumber("backleft turn motor position", 69);
 
 }
 
