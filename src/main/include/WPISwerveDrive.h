@@ -1,5 +1,5 @@
 #pragma once
-#include "SwerveDrive.h"
+#include "Interfaces/SwerveDrive.h"
 
 struct SwerveConfig{
     bool idle_mode;
