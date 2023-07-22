@@ -4,6 +4,8 @@
 void NavXGyro::Configure(GyroConfig &config)
 {
     m_gyro = new AHRS(frc::SPI::Port::kMXP);
+    m_is_inverted = config.is_inverted;
+    m_zero_heading = config.zero_heading;
 }
 
 frc::Rotation3d NavXGyro::GetYawPitchRoll() 
@@ -15,27 +17,42 @@ frc::Rotation3d NavXGyro::GetYawPitchRoll()
     return yaw_pitch_roll;
 }
 
-frc::Rotation2d NavXGyro::GetHeading() 
+frc::Rotation2d NavXGyro::GetHeading()
 {
-    return frc::Rotation2d();
+    frc::Rotation2d rawHeading = GetRawHeading();
+    double heading = double((rawHeading - m_zero_heading).Degrees());
+
+    if (heading < 0) 
+    {
+        heading += 360.0f;
+    }
+
+    return frc::Rotation2d(units::degree_t(heading));
 }
 
 frc::Rotation2d NavXGyro::GetRawHeading() 
 {
-    return frc::Rotation2d();
+    double rawHeading = m_gyro->GetAngle();
+
+    if (m_is_inverted) 
+    {
+        rawHeading = std::abs(360.0f - rawHeading);
+    }
+
+    return frc::Rotation2d(units::degree_t(rawHeading));
 }
 
 bool NavXGyro::GetInverted() 
 {
-    return false;
+    return m_is_inverted;
 }
 
 void NavXGyro::SetInverted(bool inverted) 
 {
-
+    m_is_inverted = inverted;
 }
 
 void NavXGyro::SetZeroHeading(double zero_heading) 
 {
-
+    m_zero_heading = frc::Rotation2d(units::degree_t(zero_heading));
 }
