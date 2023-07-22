@@ -1,6 +1,6 @@
 #pragma once
-
-
+#include "SwerveAbsoluteEncoder.h"
+#include <frc/AnalogEncoder.h>
 
 struct AbsoluteEncoderConfig
 {

@@ -7,8 +7,8 @@ struct GyroConfig;
 class SwerveGyro
 {
      public:
-        SwerveGyro();
-        ~SwerveGyro();
+        SwerveGyro() = default;
+        ~SwerveGyro() = default;
         virtual void Configure(GyroConfig &config) = 0;
         virtual frc::Rotation3d GetYawPitchRoll() = 0;
         virtual frc::Rotation2d GetHeading() = 0;
