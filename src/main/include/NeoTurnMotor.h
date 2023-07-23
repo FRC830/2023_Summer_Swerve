@@ -8,7 +8,14 @@ struct SwerveTurnMotorConfig{
     SwerveAbsoluteEncoder *absouluteEncoder; 
     int deviceID;
     bool inverted; 
-
+    rev::CANSparkMax *turn_motor; 
+    rev::SparkMaxRelativeEncoder *relative_Encoder;
+    rev::SparkMaxPIDController *PID;
+    double p;
+    double i;
+    double d;
+    double ff;
+    double ratio;
 };
 
 class NeoTurnMotor : public SwerveTurnMotor {
@@ -23,8 +30,6 @@ class NeoTurnMotor : public SwerveTurnMotor {
         virtual void SetInverted(bool invert) override; 
         virtual void ForceTurnDirectionCW() override; 
         virtual void ForceTurnDirectionCCW() override; 
-       
-
 
     private: 
        SwerveAbsoluteEncoder *m_AbsouluteEncoder;

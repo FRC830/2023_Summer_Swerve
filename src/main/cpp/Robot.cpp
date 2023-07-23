@@ -33,6 +33,7 @@ void Robot::RobotPeriodic() {}
  * if-else structure below with additional strings. If using the SendableChooser
  * make sure to add them to the chooser code above as well.
  */
+
 void Robot::AutonomousInit() {
   m_autoSelected = m_chooser.GetSelected();
   // m_autoSelected = SmartDashboard::GetString("Auto Selector",
@@ -56,8 +57,8 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() 
 {
-  AbsoluteEncoderConfig config;
-  config.port_number = 2;
+  /* AbsoluteEncoderConfig config;
+  config.encoder = &bl_abs_enc;
   config.is_inverted = true;
   m_back_left_analog_encoder.Configure(config);
   m_back_left_analog_encoder.SetZeroHeading(m_back_left_analog_encoder.GetRawHeading());
@@ -66,16 +67,44 @@ void Robot::TeleopInit()
   nConfig.absouluteEncoder= &m_back_left_analog_encoder;
   nConfig.deviceID = 4;
   nConfig.inverted = true;
-  m_back_left_turn_motor.Configure(nConfig);
+  nConfig.turn_motor = &bl_turn_mtr;
+  nConfig.relative_Encoder = &bl_turn_enc;
+  nConfig.PID = &bl_turn_pid; 
+  nConfig.p = TURN_P;
+  nConfig.i = TURN_I;
+  nConfig.d = TURN_D;
+  nConfig.ff = TURN_FF;
+  nConfig.ratio = 1;
+  m_back_left_turn_motor.Configure(nConfig); */
 
-  frc::SmartDashboard::PutNumber("backleft turn motor position", 69);
+    bl_turn_pid.SetP(0.005);
+    bl_turn_pid.SetI(0);
+    bl_turn_pid.SetD(0.03);
+  bl_turn_enc.SetPositionConversionFactor(MOTOR_ROT_TO_DEG);
+  bl_turn_mtr.BurnFlash(); 
 }
 
 void Robot::TeleopPeriodic() 
 {
-  m_back_left_turn_motor.SetRotation(frc::Rotation2d(static_cast<units::degree_t>(frc::SmartDashboard::GetNumber("backleft turn motor position", 69))));
-  //std::cout << "\rCurrent motor heading/positon:\t" << static_cast<double>(m_back_left_analog_encoder.GetHeading().Degrees()) << "\tsoftware motor positon" << frc::SmartDashboard::GetNumber("backleft turn motor position", 69);
+  // //m_back_left_turn_motor.SetRotation(frc::Rotation2d(static_cast<units::degree_t>(frc::SmartDashboard::GetNumber("backleft turn motor position", 69))));
+  // //std::cout << "\rCurrent motor heading/positon:\t" << static_cast<double>(m_back_left_analog_encoder.GetHeading().Degrees()) << "\tsoftware motor positon" << frc::SmartDashboard::GetNumber("backleft turn motor position", 69);
+  // double p = frc::SmartDashboard::GetNumber("p", 1);
+  // double i = frc::SmartDashboard::GetNumber("i", 1);
+  // double d = frc::SmartDashboard::GetNumber("d", 1);
+  // double sp = frc::SmartDashboard::GetNumber("Set Point", 0);
 
+  // if (p != bl_turn_pid.GetP() || i != bl_turn_pid.GetI() || d != bl_turn_pid.GetD())
+  // {
+
+
+  //   // frc::SmartDashboard::PutNumber("p", p);
+  //   // frc::SmartDashboard::PutNumber("i", i);
+  //   // frc::SmartDashboard::PutNumber("d", d);
+  // }
+double sp = frc::SmartDashboard::GetNumber("Set Point", 0);
+  bl_turn_pid.SetReference(50, rev::ControlType::kPosition);
+  frc::SmartDashboard::PutNumber("Current Position", bl_turn_enc.GetPosition());
+  // frc::SmartDashboard::PutNumber("Set Position", sp);
 }
 
 void Robot::DisabledInit() {}

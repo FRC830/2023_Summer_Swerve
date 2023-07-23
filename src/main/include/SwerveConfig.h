@@ -3,7 +3,7 @@
 #include <frc/AnalogEncoder.h>
 #include <frc/geometry/Rotation2d.h>
 #include <frc/geometry/Translation2d.h>
-#include <AHRS.h>
+// #include <AHRS.h>
 
 #include "rev/CANSparkMax.h"
 
@@ -11,7 +11,7 @@
 // #                  Front Left Module                      #
 // ###########################################################
 // --------------------Absolute Encoder-----------------------
-const int FL_ABS_ENC_PORT = 0;
+/* const int FL_ABS_ENC_PORT = 0;
 const bool FL_ABS_ENC_INVERTED = false;
 const frc::Rotation2d FL_ZERO_HEADING{units::degree_t{0.0f}};
 
@@ -30,14 +30,14 @@ const int FL_DRIVE_MTR_ID = 0;
 
 rev::CANSparkMax fl_drive_mtr{FL_DRIVE_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
 rev::SparkMaxRelativeEncoder fl_drive_enc = fl_drive_mtr.GetEncoder();
-rev::SparkMaxPIDController fl_drive_pid = fl_drive_mtr.GetPIDController();
+rev::SparkMaxPIDController fl_drive_pid = fl_drive_mtr.GetPIDController(); */
 
 
 // ###########################################################
 // #                  Front Right Module                     #
 // ###########################################################
 // --------------------Absolute Encoder-----------------------
-const int FR_ABS_ENC_PORT = 0;
+/* const int FR_ABS_ENC_PORT = 0;
 const bool FR_ABS_ENC_INVERTED = false;
 const frc::Rotation2d FR_ZERO_HEADING{units::degree_t{0.0f}};
 
@@ -56,21 +56,22 @@ const int FR_DRIVE_MTR_ID = 0;
 
 rev::CANSparkMax fr_drive_mtr{FR_DRIVE_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
 rev::SparkMaxRelativeEncoder fr_drive_enc = fr_drive_mtr.GetEncoder();
-rev::SparkMaxPIDController fr_drive_pid = fr_drive_mtr.GetPIDController();
+rev::SparkMaxPIDController fr_drive_pid = fr_drive_mtr.GetPIDController(); */
 
 
 // ###########################################################
 // #                  Back Left Module                       #
 // ###########################################################
 // --------------------Absolute Encoder-----------------------
-const int BL_ABS_ENC_PORT = 0;
-const bool BL_ABS_ENC_INVERTED = false;
+/* const int BL_ABS_ENC_PORT = 2;
+const bool BL_ABS_ENC_INVERTED = true;
 const frc::Rotation2d BL_ZERO_HEADING{units::degree_t{0.0f}};
 
-frc::AnalogEncoder bl_abs_enc{BL_ABS_ENC_PORT};
+frc::AnalogEncoder bl_abs_enc{BL_ABS_ENC_PORT}; */
+
 
 // -----------------------Turn Motor--------------------------
-const int BL_TURN_MTR_ID = 0;
+const int BL_TURN_MTR_ID = 4;
 const bool BL_TURN_MTR_INVERTED = false;
 
 rev::CANSparkMax bl_turn_mtr{BL_TURN_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
@@ -78,18 +79,18 @@ rev::SparkMaxRelativeEncoder bl_turn_enc = bl_turn_mtr.GetEncoder();
 rev::SparkMaxPIDController bl_turn_pid = bl_turn_mtr.GetPIDController();
 
 // -----------------------Drive Motor-------------------------
-const int BL_DRIVE_MTR_ID = 0;
+/* const int BL_DRIVE_MTR_ID = 1;
 
 rev::CANSparkMax bl_drive_mtr{BL_DRIVE_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
 rev::SparkMaxRelativeEncoder bl_drive_enc = bl_drive_mtr.GetEncoder();
-rev::SparkMaxPIDController bl_drive_pid = bl_drive_mtr.GetPIDController();
+rev::SparkMaxPIDController bl_drive_pid = bl_drive_mtr.GetPIDController(); */
 
 
 // ###########################################################
 // #                  Back Right Module                      #
 // ###########################################################
 // --------------------Absolute Encoder-----------------------
-const int BR_ABS_ENC_PORT = 0;
+/* const int BR_ABS_ENC_PORT = 0;
 const bool BR_ABS_ENC_INVERTED = false;
 const frc::Rotation2d BR_ZERO_HEADING{units::degree_t{0.0f}};
 
@@ -108,7 +109,7 @@ const int BR_DRIVE_MTR_ID = 0;
 
 rev::CANSparkMax br_drive_mtr{BR_DRIVE_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
 rev::SparkMaxRelativeEncoder br_drive_enc = br_drive_mtr.GetEncoder();
-rev::SparkMaxPIDController br_drive_pid = br_drive_mtr.GetPIDController();
+rev::SparkMaxPIDController br_drive_pid = br_drive_mtr.GetPIDController(); */
 
 
 // ###########################################################
@@ -145,7 +146,7 @@ const double DRIVE_FF = 0.0;
 const bool GYRO_INVERTED = false;
 const frc::Rotation2d GYRO_ZERO_HEADING{units::degree_t{0.0f}};
 
-AHRS robot_gyro{frc::SPI::Port::kMXP};
+// AHRS robot_gyro{frc::SPI::Port::kMXP};
 
 // --------------------------Swerve---------------------------
 const double MAX_DRIVE_SPEED_MPS = 15.0;

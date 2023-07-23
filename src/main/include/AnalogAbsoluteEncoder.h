@@ -5,7 +5,7 @@
 
 struct AbsoluteEncoderConfig
 {
-    int port_number;
+    frc::AnalogEncoder *encoder;
     bool is_inverted;
     frc::Rotation2d zero_heading;
 };

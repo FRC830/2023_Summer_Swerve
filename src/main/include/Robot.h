@@ -10,7 +10,8 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include "AnalogAbsoluteEncoder.h"
 #include "NeoTurnMotor.h"
-#include <iostream> // For troubleshooting
+#include <iostream>
+#include "SwerveConfig.h"
 
 class Robot : public frc::TimedRobot {
  public:
