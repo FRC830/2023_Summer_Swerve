@@ -10,7 +10,6 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include "AnalogAbsoluteEncoder.h"
 #include "NavXGyro.h"
-#include <iostream> // For troubleshooting
 
 class Robot : public frc::TimedRobot {
  public:

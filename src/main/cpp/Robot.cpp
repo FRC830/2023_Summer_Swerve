@@ -65,14 +65,17 @@ void Robot::TeleopInit()
 
   // NavX Gyro Configuration
   GyroConfig gyro_config;
-  gyro_config.is_inverted = false;
-  gyro_config.zero_heading = units::degree_t(0);
+  gyro_config.is_inverted = true;
+  gyro_config.zero_heading = units::degree_t(90);
   gyro.Configure(gyro_config);
+
+  // 
 }
 
 void Robot::TeleopPeriodic() 
 {
-  std::cout << double(units::degree_t(gyro.GetYawPitchRoll().Z())) << std::endl;
+  frc::SmartDashboard::PutNumber("Heading", double(gyro.GetHeading().Degrees()));
+  frc::SmartDashboard::PutNumber("Raw Heading", double(gyro.GetHeading().Degrees()));
 }
 
 void Robot::DisabledInit() {}
