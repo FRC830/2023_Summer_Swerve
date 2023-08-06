@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Interfaces/SwerveTurnMotor.h"
-#include "Interfaces/SwerveAbsoluteEncoder.h"
+#include "SwerveTurnMotor.h"
+#include "SwerveAbsoluteEncoder.h"
 #include "rev/CANSparkMax.h"
 
 struct SwerveTurnMotorConfig{

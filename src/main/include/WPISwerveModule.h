@@ -1,5 +1,5 @@
 #pragma once
-#include "Interfaces/SwerveModule.h"
+#include "SwerveModule.h"
 
 struct SwerveModuleConfig
 {
