@@ -2,7 +2,6 @@
 
 #include <frc/geometry/Rotation2d.h>
 #include "units/velocity.h"
-#include <rev/CANSparkMax.h>
 
 struct SwerveDriveMotorConfig;
 
@@ -22,7 +21,6 @@ class SwerveDriveMotor{
 
     private: 
 
- 
 
 
 
