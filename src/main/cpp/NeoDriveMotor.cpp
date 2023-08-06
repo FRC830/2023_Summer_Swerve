@@ -8,18 +8,18 @@ void NeoDriveMotor::Configure(SwerveDriveMotorConfig &config){
     m_motorID = config.motorID;
     m_motor = config.motor;
     m_PID = config.PID;
-    m_inverted  = config.inverted;
     m_motor->SetIdleMode(config.idleMode);
     m_encoder->SetVelocityConversionFactor(config.ratio);
     m_motor->BurnFlash();
-    m_MaxSpeed = config.MaxSpeed;
+    m_MaxSpeed = config.maxSpeed;
     
 };
 
 void NeoDriveMotor::SetVelocity(units::velocity::feet_per_second_t v) {
 
 
-    m_motor->SetVoltage(v / m_MaxSpeed * 12.0_V);
+    
+    m_PID->SetReference(v.to<double>(), rev::CANSparkMax::ControlType::kVelocity);
 
 };
 

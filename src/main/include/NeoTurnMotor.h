@@ -21,8 +21,8 @@ struct SwerveTurnMotorConfig{
 class NeoTurnMotor : public SwerveTurnMotor {
 
     public:
-        NeoTurnMotor();
-        virtual ~NeoTurnMotor();
+        NeoTurnMotor() = default;
+        virtual ~NeoTurnMotor() = default;
         virtual void Configure(SwerveTurnMotorConfig &config) override;
         virtual void SetRotation(frc::Rotation2d deg) override; 
         virtual frc::Rotation2d GetRotation() override; 

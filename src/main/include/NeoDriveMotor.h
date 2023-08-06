@@ -16,7 +16,7 @@ struct SwerveDriveMotorConfig {
     double d;
     double ff;
     double ratio;
-    units::velocity::meters_per_second_t MaxSpeed;
+    units::velocity::meters_per_second_t maxSpeed;
     
 
 };
