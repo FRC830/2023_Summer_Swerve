@@ -4,7 +4,7 @@ void AnalogAbsoluteEncoder::Configure(AbsoluteEncoderConfig &config)
 {
     SetInverted(config.is_inverted);
     SetZeroHeading(config.zero_heading);
-    m_encoder = new frc::AnalogEncoder(config.port_number);
+    m_encoder = config.encoder;
 }
 
 frc::Rotation2d AnalogAbsoluteEncoder::GetHeading()
