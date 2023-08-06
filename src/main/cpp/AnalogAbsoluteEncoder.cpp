@@ -13,7 +13,7 @@ frc::Rotation2d AnalogAbsoluteEncoder::GetHeading()
     double heading = static_cast<double>((raw_heading - m_zero_heading).Degrees());
     if (heading < 0)
     {
-        heading = 360.0f - heading;
+        heading = 360.0f + heading;
     }
 
     return frc::Rotation2d(static_cast<units::degree_t>(heading));
