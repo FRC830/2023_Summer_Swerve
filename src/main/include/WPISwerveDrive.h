@@ -1,5 +1,5 @@
 #pragma once
-#include "Interfaces/SwerveDrive.h"
+#include "SwerveDrive.h"
 
 struct SwerveConfig{
     bool idle_mode;
@@ -20,7 +20,7 @@ class WPISwerveDrive : public SwerveDrive
         virtual void Configure(SwerveConfig &config) = 0;
         virtual bool GetEbrake() override;
         virtual void SetEbrake(bool ebrake) override;
-        //virtual void Drive(double x_position, double y_position, double rotation);
+        // virtual void Drive(double x_position, double y_position, double rotation);
         virtual void Drive(double vx, double vy, double omega) override;
         virtual void Drive(frc::ChassisSpeeds speed) override;
         virtual void Drive(std::vector<frc::SwerveModuleState> &state) override;
