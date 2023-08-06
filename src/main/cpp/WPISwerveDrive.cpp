@@ -1,7 +1,6 @@
 #include "WPISwerveDrive.h"
 
 void WPISwerveDrive::Configure(SwerveConfig &config){
-    SetIdleMode(config.idle_mode);
     m_ebrake = config.ebrake;
     m_maxDriveSpeed = config.maxDriveSpeed;
     m_maxTurnSpeed = config.maxTurnSpeed;
@@ -10,6 +9,7 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     frc::Translation2d m_frontRightLocation = config.frontRightLocation;
     frc::Translation2d m_backLeftLocation = config.backLeftLocation;
     frc::Translation2d m_backRightLocation = config.backRightLocation;
+    SetIdleMode(config.idle_mode);
 }
 
 

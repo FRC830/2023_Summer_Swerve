@@ -2,9 +2,10 @@
 
 void WPISwerveModule::Configure(SwerveModuleConfig &config)
 {
-    SetIdleMode(config.idleMode);
     m_driveMotor = config.driveMotor;
     m_turnMotor = config.turnMotor;
+    SetIdleMode(config.idleMode);
+
 };
 
 void WPISwerveModule::SetState(frc::SwerveModuleState state)

@@ -7,8 +7,9 @@ void NeoTurnMotor::Configure(SwerveTurnMotorConfig &config){
     m_relative_Encoder = config.relative_Encoder;
     m_PID = config.PID;
     m_turn_motor->SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-    SetInverted(config.inverted);
+    
     m_relative_Encoder->SetPositionConversionFactor(config.ratio);
+    SetInverted(config.inverted);
     m_turn_motor->BurnFlash();
 };    
 

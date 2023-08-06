@@ -141,7 +141,8 @@ void Robot::TeleopInit()
 
 
 
-  
+  frc::SmartDashboard::PutNumber("Speed", 0.0);
+  frc::SmartDashboard::PutNumber("ang", 0.0);
   
   
 
@@ -170,6 +171,15 @@ void Robot::TeleopPeriodic()
   frc::SmartDashboard::PutNumber("Current Turn Position", bl_turn_enc.GetPosition());
   frc::SmartDashboard::PutNumber("Current Drive velocity", m_driveMotor.GetVelocity());
   frc::SmartDashboard::PutNumber("Current Absoluteheading", m_ABSencoder.GetHeading().Degrees().to<double>());
+
+  auto speed = frc::SmartDashboard::GetNumber("Speed", 0.0);
+  auto angle = frc::SmartDashboard::GetNumber("ang", 0.0);
+
+  frc::SwerveModuleState state{units::feet_per_second_t(speed), units::degree_t(angle)};
+
+  m_swerveModule_BL.SetState(state);
+
+  
   // frc::SmartDashboard::PutNumber("Set Position", sp);
 }
 
