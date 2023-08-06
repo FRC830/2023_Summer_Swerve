@@ -17,9 +17,14 @@ void NeoTurnMotor::Configure(SwerveTurnMotorConfig &config){
 
 void NeoTurnMotor::SetRotation(frc::Rotation2d deg){
     frc::Rotation2d realTurn = deg - GetRotation();
-    int turnTicks = static_cast<double>(realTurn.Degrees()) * ratio; 
-    int currentTicks = m_relative_Encoder->GetPosition() * 42; 
-    m_relative_Encoder->SetPosition(currentTicks+turnTicks);
+    if(realTurn.Degrees().to<double>() > 180.0) {
+
+        realTurn = realTurn - frc::Rotation2d(units::degree_t(360.0));
+
+    }
+   
+    double targetPos = m_relative_Encoder->GetPosition() + realTurn.Degrees().to<double>();
+    m_PID->SetReference(targetPos, rev::CANSparkMax::ControlType::kPosition);
 }; 
 
 frc::Rotation2d NeoTurnMotor::GetRotation(){
