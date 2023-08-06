@@ -84,7 +84,6 @@ void Robot::TeleopInit()
   bl_turn_mtr.BurnFlash(); 
   // Absolute Encoder configuration
   AbsoluteEncoderConfig absolute_encoder_config;
-  absolute_encoder_config.port_number = 2;
   absolute_encoder_config.is_inverted = true;
   m_back_left_analog_encoder.Configure(absolute_encoder_config);
   m_back_left_analog_encoder.SetZeroHeading(m_back_left_analog_encoder.GetRawHeading());

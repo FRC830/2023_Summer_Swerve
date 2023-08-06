@@ -1,5 +1,5 @@
 #pragma once
-#include "SwerveGyro.h"
+#include "Interfaces/SwerveGyro.h"
 #include <AHRS.h>
 
 struct GyroConfig 
