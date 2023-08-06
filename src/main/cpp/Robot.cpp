@@ -101,8 +101,8 @@ void Robot::TeleopPeriodic()
   //   // frc::SmartDashboard::PutNumber("i", i);
   //   // frc::SmartDashboard::PutNumber("d", d);
   // }
-double sp = frc::SmartDashboard::GetNumber("Set Point", 0);
-  bl_turn_pid.SetReference(50, rev::ControlType::kPosition);
+  double sp = frc::SmartDashboard::GetNumber("Set Point", 0);
+  bl_turn_pid.SetReference(50, rev::CANSparkMax::ControlType::kPosition);
   frc::SmartDashboard::PutNumber("Current Position", bl_turn_enc.GetPosition());
   // frc::SmartDashboard::PutNumber("Set Position", sp);
 }

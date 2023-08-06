@@ -12,7 +12,7 @@ void WPISwerveModule::SetState(frc::SwerveModuleState state)
 
 frc::SwerveModuleState WPISwerveModule::GetState()
 {
-    
+ 
 };
 
 void WPISwerveModule::SetIdleMode(bool idleMode)
