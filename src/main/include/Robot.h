@@ -12,6 +12,7 @@
 #include "NeoTurnMotor.h"
 #include <iostream>
 #include "SwerveConfig.h"
+#include "NavXGyro.h"
 
 class Robot : public frc::TimedRobot {
  public:
@@ -35,4 +36,5 @@ class Robot : public frc::TimedRobot {
   std::string m_autoSelected;
   AnalogAbsoluteEncoder m_back_left_analog_encoder;
   NeoTurnMotor m_back_left_turn_motor;
+  NavXGyro gyro;
 };

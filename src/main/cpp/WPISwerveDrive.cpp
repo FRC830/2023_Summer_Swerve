@@ -10,7 +10,6 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     frc::Translation2d m_frontRightLocation = config.frontRightLocation;
     frc::Translation2d m_backLeftLocation = config.backLeftLocation;
     frc::Translation2d m_backRightLocation = config.backRightLocation;
-
 }
 
 

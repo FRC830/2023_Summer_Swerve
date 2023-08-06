@@ -82,6 +82,20 @@ void Robot::TeleopInit()
     bl_turn_pid.SetD(0.03);
   bl_turn_enc.SetPositionConversionFactor(MOTOR_ROT_TO_DEG);
   bl_turn_mtr.BurnFlash(); 
+  // Absolute Encoder configuration
+  AbsoluteEncoderConfig absolute_encoder_config;
+  absolute_encoder_config.port_number = 2;
+  absolute_encoder_config.is_inverted = true;
+  m_back_left_analog_encoder.Configure(absolute_encoder_config);
+  m_back_left_analog_encoder.SetZeroHeading(m_back_left_analog_encoder.GetRawHeading());
+
+  // NavX Gyro Configuration
+  GyroConfig gyro_config;
+  gyro_config.is_inverted = true;
+  gyro_config.zero_heading = units::degree_t(90);
+  gyro.Configure(gyro_config);
+
+  // 
 }
 
 void Robot::TeleopPeriodic() 
@@ -105,6 +119,8 @@ void Robot::TeleopPeriodic()
   bl_turn_pid.SetReference(50, rev::CANSparkMax::ControlType::kPosition);
   frc::SmartDashboard::PutNumber("Current Position", bl_turn_enc.GetPosition());
   // frc::SmartDashboard::PutNumber("Set Position", sp);
+  frc::SmartDashboard::PutNumber("Heading", double(gyro.GetHeading().Degrees()));
+  frc::SmartDashboard::PutNumber("Raw Heading", double(gyro.GetHeading().Degrees()));
 }
 
 void Robot::DisabledInit() {}
