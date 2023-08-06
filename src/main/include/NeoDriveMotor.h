@@ -24,15 +24,13 @@ struct SwerveDriveMotorConfig {
 class NeoDriveMotor : SwerveDriveMotor {
     
     public:
-        NeoDriveMotor(); 
-        virtual ~NeoDriveMotor();
+        NeoDriveMotor() = default; 
+        virtual ~NeoDriveMotor() = default;
         virtual void Configure(SwerveDriveMotorConfig &config) override; 
         virtual void SetVelocity(units::velocity::feet_per_second_t v) override; 
         virtual double GetVelocity() override; 
-        virtual void SetInverted(bool isInverted) override;
-        virtual bool GetInverted() override;
-        virtual void SetIdleMode(rev::CANSparkMax::IdleMode m) override;
-        virtual rev::CANSparkMax::IdleMode GetIdleMode() override; // just incase if we use motors other than the rev ones that use otehr than the rev stuff. idk 
+        virtual void SetIdleMode(bool m) override;
+        virtual bool GetIdleMode() override; // just incase if we use motors other than the rev ones that use otehr than the rev stuff. idk 
 
 
 

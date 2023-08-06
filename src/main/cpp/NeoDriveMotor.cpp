@@ -29,24 +29,16 @@ double NeoDriveMotor::GetVelocity() {
 
 };
 
-void NeoDriveMotor::SetInverted(bool isInverted) {
-    m_motor->SetInverted(isInverted);
 
-};
 
-bool NeoDriveMotor::GetInverted() {
-
-   return m_motor->GetInverted();
-};
-
-void NeoDriveMotor::SetIdleMode(rev::CANSparkMax::IdleMode m) {
-    m_motor->SetIdleMode(m);
+void NeoDriveMotor::SetIdleMode(bool m) {
+    m_motor->SetIdleMode(m ? rev::CANSparkMax::IdleMode::kBrake : rev::CANSparkMax::IdleMode::kCoast);
 
 };
 
 
-rev::CANSparkMax::IdleMode NeoDriveMotor::GetIdleMode() {
-    return m_motor->GetIdleMode();
+bool NeoDriveMotor::GetIdleMode() {
+    return m_motor->GetIdleMode() == rev::CANSparkMax::IdleMode::kBrake;
 
 };
 
