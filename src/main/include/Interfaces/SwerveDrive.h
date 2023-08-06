@@ -11,6 +11,8 @@ struct SwerveConfig;
 class SwerveDrive 
 {
     public:
+        SwerveDrive() = default;
+        virtual ~SwerveDrive() = default;
         virtual void Configure(SwerveConfig &config) = 0;
         virtual bool GetEbrake() = 0;
         virtual void SetEbrake(bool ebrake) = 0;

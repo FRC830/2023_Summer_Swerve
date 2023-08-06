@@ -10,6 +10,8 @@ struct SwerveModuleConfig
 class WPISwerveModule : SwerveModule
 {
 public:
+    WPISwerveModule() = default;
+    virtual ~WPISwerveModule() = default;
     virtual void SetState(frc::SwerveModuleState state) override; 
     virtual frc::SwerveModuleState GetState() override;
     virtual void SetIdleMode(bool idleMode) override;

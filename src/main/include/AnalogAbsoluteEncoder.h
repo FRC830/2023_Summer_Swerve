@@ -12,6 +12,8 @@ struct AbsoluteEncoderConfig
 class AnalogAbsoluteEncoder : public SwerveAbsoluteEncoder
 {
     public:
+        AnalogAbsoluteEncoder() = default;
+        virtual ~AnalogAbsoluteEncoder() = default;
         virtual void Configure(AbsoluteEncoderConfig &config) override;
         virtual frc::Rotation2d GetHeading() override;
         virtual frc::Rotation2d GetRawHeading() override;

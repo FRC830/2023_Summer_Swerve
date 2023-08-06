@@ -1,6 +1,7 @@
 #pragma once
 
 #include <frc/geometry/Rotation2d.h>
+#include "rev/CANSparkMax.h"
 #include "units/velocity.h"
 
 struct SwerveDriveMotorConfig;

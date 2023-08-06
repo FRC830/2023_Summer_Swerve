@@ -17,6 +17,8 @@ struct SwerveConfig{
 class WPISwerveDrive : public SwerveDrive
 {
     public:
+        WPISwerveDrive() = default;
+        virtual ~WPISwerveDrive() = default;
         virtual void Configure(SwerveConfig &config) = 0;
         virtual bool GetEbrake() override;
         virtual void SetEbrake(bool ebrake) override;

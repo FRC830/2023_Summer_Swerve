@@ -11,6 +11,8 @@ struct GyroConfig
 class NavXGyro : public SwerveGyro
 {
     public:
+        NavXGyro() = default;
+        virtual ~NavXGyro() = default;
         virtual void Configure(GyroConfig &config) override;
         virtual frc::Rotation3d GetYawPitchRoll() override;
         virtual frc::Rotation2d GetHeading() override;

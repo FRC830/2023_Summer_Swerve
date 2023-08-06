@@ -8,7 +8,7 @@ class SwerveAbsoluteEncoder
 
     public:
         SwerveAbsoluteEncoder() = default;
-        ~SwerveAbsoluteEncoder() = default; 
+        virtual ~SwerveAbsoluteEncoder() = default; 
         virtual void Configure(AbsoluteEncoderConfig &config) = 0;
         virtual frc::Rotation2d GetHeading() = 0;
         virtual frc::Rotation2d GetRawHeading() = 0;
