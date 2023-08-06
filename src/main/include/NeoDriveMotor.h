@@ -1,7 +1,7 @@
 #pragma once
 
 #include <rev/CANSparkMAX.h>
-#include "SwerveDriveMotor.h"
+#include "Interfaces/SwerveDriveMotor.h"
 #include "units/velocity.h"
 
 struct SwerveDriveMotorConfig {
