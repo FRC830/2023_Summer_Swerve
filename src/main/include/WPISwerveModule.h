@@ -1,9 +1,12 @@
 #pragma once
 #include "Interfaces/SwerveModule.h"
-
+#include "Interfaces/SwerveDriveMotor.h"
+#include "Interfaces/SwerveTurnMotor.h"
 struct SwerveModuleConfig
 {
     bool idleMode;
+    SwerveDriveMotor *driveMotor;
+    SwerveTurnMotor *turnMotor;
 
 };
 
@@ -20,5 +23,7 @@ public:
 
 private:
     bool m_idleMode;
+    SwerveDriveMotor *m_driveMotor;
+    SwerveTurnMotor *m_turnMotor;
 
 };
