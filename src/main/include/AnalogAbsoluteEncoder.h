@@ -1,5 +1,5 @@
 #pragma once
-#include "SwerveAbsoluteEncoder.h"
+#include "Interfaces/SwerveAbsoluteEncoder.h"
 #include <frc/AnalogEncoder.h>
 #include <math.h>
 

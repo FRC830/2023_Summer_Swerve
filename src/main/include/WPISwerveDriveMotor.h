@@ -1,5 +1,5 @@
 #pragma once
-#include "SwerveDriveMotor.h"
+#include "Interfaces/SwerveDriveMotor.h"
 
 struct SwerveDriveMotorConfig{
     bool inverted;
