@@ -21,7 +21,7 @@ struct SwerveDriveMotorConfig {
 
 };
 
-class NeoDriveMotor : SwerveDriveMotor {
+class NeoDriveMotor : public SwerveDriveMotor {
     
     public:
         NeoDriveMotor() = default; 

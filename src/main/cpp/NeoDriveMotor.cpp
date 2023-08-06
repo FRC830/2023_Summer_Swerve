@@ -1,8 +1,6 @@
 #include "NeoDriveMotor.h"
 
 
-NeoDriveMotor::NeoDriveMotor(){};
-NeoDriveMotor::~NeoDriveMotor(){}
 void NeoDriveMotor::Configure(SwerveDriveMotorConfig &config){
     m_encoder = config.encoder;
     m_motorID = config.motorID;

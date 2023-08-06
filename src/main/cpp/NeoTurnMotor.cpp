@@ -1,8 +1,5 @@
 #include"NeoTurnMotor.h"
 
-NeoTurnMotor::NeoTurnMotor(){};
-
-NeoTurnMotor::~NeoTurnMotor(){};
 
 void NeoTurnMotor::Configure(SwerveTurnMotorConfig &config){
     m_AbsouluteEncoder = config.absouluteEncoder;

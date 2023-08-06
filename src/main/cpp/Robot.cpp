@@ -77,22 +77,73 @@ void Robot::TeleopInit()
   nConfig.ratio = 1;
   m_back_left_turn_motor.Configure(nConfig); */
 
-    bl_turn_pid.SetP(0.005);
-    bl_turn_pid.SetI(0);
-    bl_turn_pid.SetD(0.03);
-  bl_turn_enc.SetPositionConversionFactor(MOTOR_ROT_TO_DEG);
-  bl_turn_mtr.BurnFlash(); 
-  // Absolute Encoder configuration
-  AbsoluteEncoderConfig absolute_encoder_config;
-  absolute_encoder_config.is_inverted = true;
-  m_back_left_analog_encoder.Configure(absolute_encoder_config);
-  m_back_left_analog_encoder.SetZeroHeading(m_back_left_analog_encoder.GetRawHeading());
+  //   bl_turn_pid.SetP(0.005);
+  //   bl_turn_pid.SetI(0);
+  //   bl_turn_pid.SetD(0.03);
+  // bl_turn_enc.SetPositionConversionFactor(MOTOR_ROT_TO_DEG);
+  // bl_turn_mtr.BurnFlash(); 
+  // // Absolute Encoder configuration
+  // AbsoluteEncoderConfig absolute_encoder_config;
+  // absolute_encoder_config.is_inverted = true;
+  // m_back_left_analog_encoder.Configure(absolute_encoder_config);
+  // m_back_left_analog_encoder.SetZeroHeading(m_back_left_analog_encoder.GetRawHeading());
 
-  // NavX Gyro Configuration
-  GyroConfig gyro_config;
-  gyro_config.is_inverted = true;
-  gyro_config.zero_heading = units::degree_t(90);
-  gyro.Configure(gyro_config);
+  // // NavX Gyro Configuration
+  // GyroConfig gyro_config;
+  // gyro_config.is_inverted = true;
+  // gyro_config.zero_heading = units::degree_t(90);
+  // gyro.Configure(gyro_config);
+
+  AbsoluteEncoderConfig encoderConfig;
+  encoderConfig.encoder = &bl_abs_enc;
+  encoderConfig.is_inverted = BL_ABS_ENC_INVERTED;
+  encoderConfig.zero_heading = BL_ZERO_HEADING;
+
+  m_ABSencoder.Configure(encoderConfig);
+
+  m_ABSencoder.SetZeroHeading(m_ABSencoder.GetRawHeading());
+  
+  SwerveTurnMotorConfig turnConfig;
+  turnConfig.absouluteEncoder = &m_ABSencoder;
+  turnConfig.d = TURN_D;
+  turnConfig.deviceID = BL_TURN_MTR_ID;
+  turnConfig.ff = TURN_FF;
+  turnConfig.i = TURN_I;
+  turnConfig.inverted = BL_TURN_MTR_INVERTED;
+  turnConfig.p = TURN_P;
+  turnConfig.PID = &bl_turn_pid;
+  turnConfig.ratio = MOTOR_ROT_TO_DEG;
+  turnConfig.relative_Encoder = &bl_turn_enc;
+  turnConfig.turn_motor = &bl_turn_mtr;
+
+  m_turnMotor.Configure(turnConfig);
+
+  SwerveDriveMotorConfig driveConfig;
+  driveConfig.d = DRIVE_D;
+  driveConfig.ff = DRIVE_FF;
+  driveConfig.i = DRIVE_I;
+  driveConfig.p = DRIVE_P;
+  driveConfig.PID = &bl_drive_pid;
+  driveConfig.ratio = MOTOR_ROT_TO_FT / 60.0;
+  driveConfig.encoder = &bl_drive_enc;
+  driveConfig.motor = &bl_drive_mtr;
+
+  m_driveMotor.Configure(driveConfig);
+
+  
+  SwerveModuleConfig moduleConfig;
+  moduleConfig.driveMotor = &m_driveMotor;
+  moduleConfig.idleMode = true;
+  moduleConfig.turnMotor = &m_turnMotor;
+
+
+  m_swerveModule_BL.Configure(moduleConfig);
+
+
+
+  
+  
+  
 
   // 
 }
@@ -114,12 +165,12 @@ void Robot::TeleopPeriodic()
   //   // frc::SmartDashboard::PutNumber("i", i);
   //   // frc::SmartDashboard::PutNumber("d", d);
   // }
-  double sp = frc::SmartDashboard::GetNumber("Set Point", 0);
-  bl_turn_pid.SetReference(50, rev::CANSparkMax::ControlType::kPosition);
-  frc::SmartDashboard::PutNumber("Current Position", bl_turn_enc.GetPosition());
+
+  
+  frc::SmartDashboard::PutNumber("Current Turn Position", bl_turn_enc.GetPosition());
+  frc::SmartDashboard::PutNumber("Current Drive velocity", m_driveMotor.GetVelocity());
+  frc::SmartDashboard::PutNumber("Current Absoluteheading", m_ABSencoder.GetHeading().Degrees().to<double>());
   // frc::SmartDashboard::PutNumber("Set Position", sp);
-  frc::SmartDashboard::PutNumber("Heading", double(gyro.GetHeading().Degrees()));
-  frc::SmartDashboard::PutNumber("Raw Heading", double(gyro.GetHeading().Degrees()));
 }
 
 void Robot::DisabledInit() {}

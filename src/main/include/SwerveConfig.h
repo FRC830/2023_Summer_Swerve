@@ -63,27 +63,27 @@ rev::SparkMaxPIDController fr_drive_pid = fr_drive_mtr.GetPIDController(); */
 // #                  Back Left Module                       #
 // ###########################################################
 // --------------------Absolute Encoder-----------------------
-/* const int BL_ABS_ENC_PORT = 2;
+const int BL_ABS_ENC_PORT = 2;
 const bool BL_ABS_ENC_INVERTED = true;
 const frc::Rotation2d BL_ZERO_HEADING{units::degree_t{0.0f}};
 
-frc::AnalogEncoder bl_abs_enc{BL_ABS_ENC_PORT}; */
+frc::AnalogEncoder bl_abs_enc{BL_ABS_ENC_PORT};
 
 
 // -----------------------Turn Motor--------------------------
 const int BL_TURN_MTR_ID = 4;
-const bool BL_TURN_MTR_INVERTED = false;
+const bool BL_TURN_MTR_INVERTED = true;
 
 rev::CANSparkMax bl_turn_mtr{BL_TURN_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
 rev::SparkMaxRelativeEncoder bl_turn_enc = bl_turn_mtr.GetEncoder();
 rev::SparkMaxPIDController bl_turn_pid = bl_turn_mtr.GetPIDController();
 
 // -----------------------Drive Motor-------------------------
-/* const int BL_DRIVE_MTR_ID = 1;
+const int BL_DRIVE_MTR_ID = 8;
 
 rev::CANSparkMax bl_drive_mtr{BL_DRIVE_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
 rev::SparkMaxRelativeEncoder bl_drive_enc = bl_drive_mtr.GetEncoder();
-rev::SparkMaxPIDController bl_drive_pid = bl_drive_mtr.GetPIDController(); */
+rev::SparkMaxPIDController bl_drive_pid = bl_drive_mtr.GetPIDController();
 
 
 // ###########################################################
@@ -124,22 +124,22 @@ const frc::Translation2d bl_position(units::meter_t{-ROBOT_LENGTH_M / 2.0}, unit
 const frc::Translation2d br_position(units::meter_t{-ROBOT_LENGTH_M / 2.0}, units::meter_t{-ROBOT_WIDTH_M / 2.0});
 
 // ------------------------Turn Motor-------------------------
-const double TURN_GEAR_RATIO = 12.8;
+const double TURN_GEAR_RATIO = 10.2857;
 const double MOTOR_ROT_TO_DEG = 360.0 / TURN_GEAR_RATIO;
 
-const double TURN_P = 1.0;
+const double TURN_P = 0.045;
 const double TURN_I = 0.0;
-const double TURN_D = 0.1;
+const double TURN_D = 0.003;
 const double TURN_FF = 0.0;
 
 // ------------------------Drive Motor------------------------
 const double DRIVE_GEAR_RATIO = 5.5;
-const double WHEEL_DIAMETER_M = 0.1016; // 4 inches
-const double MOTOR_ROT_TO_M = (WHEEL_DIAMETER_M * 3.14159) / DRIVE_GEAR_RATIO;
+const double WHEEL_DIAMETER_FT = 0.333; // 4 inches
+const double MOTOR_ROT_TO_FT = (WHEEL_DIAMETER_FT * 3.14159) / DRIVE_GEAR_RATIO;
 
-const double DRIVE_P = 1.0;
+const double DRIVE_P = 0.000002;
 const double DRIVE_I = 0.0;
-const double DRIVE_D = 0.0;
+const double DRIVE_D = 0.001;
 const double DRIVE_FF = 0.0;
 
 // --------------------------Gyro-----------------------------
