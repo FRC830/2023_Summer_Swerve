@@ -19,17 +19,20 @@ bool WPISwerveDrive::GetEbrake() {
 void WPISwerveDrive::SetEbrake(bool ebrake) {
     m_ebrake = ebrake;
 }
-// void WPISwerveDrive::Drive(double x_position, double y_position, double rotation) {
+void WPISwerveDrive::Drive(double x_position, double y_position, double rotation) {
     
 
-//     Drive(x_position * m_maxDriveSpeed, y_position * m_maxDriveSpeed, rotation * m_maxTurnSpeed);
-// }
-void WPISwerveDrive::Drive(double vx, double vy, double omega) {
+     Drive(frc::ChassisSpeeds((units::feet_per_second_t)x_position, (units::feet_per_second_t)y_position, (units::degrees_per_second_t)rotation));
+
+}
+void WPISwerveDrive::Drive(units::feet_per_second_t vx, units::feet_per_second_t vy, units::degrees_per_second_t omega) {
+   
+    Drive(frc::ChassisSpeeds{vx, vy, omega});
     
-    Drive(frc::ChassisSpeeds((units::meters_per_second_t)vx, (units::meters_per_second_t)vy, (units::radians_per_second_t)omega));
 
 }
 void WPISwerveDrive::Drive(frc::ChassisSpeeds speed) {
+
 
     frc::SwerveDriveKinematics<4> m_kinematics{
     m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation,
@@ -37,24 +40,38 @@ void WPISwerveDrive::Drive(frc::ChassisSpeeds speed) {
  
 
     // states = m_kinematics.ToSwerveModuleStates(speed);
-    auto [fl, fr, bl, br] = m_kinematics.ToSwerveModuleStates(speed);
+    auto states = m_kinematics.ToSwerveModuleStates(speed);
     
-    states.push_back(fl);
-    states.push_back(fr);
-    states.push_back(bl);
-    states.push_back(br);
+    m_kinematics.DesaturateWheelSpeeds(&states, units::feet_per_second_t(m_maxDriveSpeed));
 
-    Drive(states);
+
+    std::vector<frc::SwerveModuleState> stateN;
+    stateN.push_back(states[0]);
+    stateN.push_back(states[1]);
+    stateN.push_back(states[2]);
+    stateN.push_back(states[3]);
+
+    Drive(stateN);
 
 }
 void WPISwerveDrive::Drive(std::vector<frc::SwerveModuleState> &state) {
+    if (!m_ebrake) {
+        for(int i = 0; i < state.size(); i++){
 
+            m_modules[i].SetState(state[i]);
+
+        }
+    }
 } 
 bool WPISwerveDrive::GetIdleMode() {
     return false;
 }
 void WPISwerveDrive::SetIdleMode(bool idle_mode) {
+     for(int i = 0; i < m_modules.size(); i++){
 
+        m_modules[i].SetIdleMode(idle_mode);
+
+    }
 }
 void WPISwerveDrive::SetRobotOriented() {
     m_orientation = false;
