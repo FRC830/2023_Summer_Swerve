@@ -21,7 +21,7 @@ void NeoTurnMotor::SetRotation(frc::Rotation2d deg){
 
     }
    
-    double targetPos = m_relative_Encoder->GetPosition() + realTurn.Degrees().to<double>();
+    double targetPos = m_AbsouluteEncoder->GetHeading().Degrees().to<double>() + realTurn.Degrees().to<double>();
     m_PID->SetReference(targetPos, rev::CANSparkMax::ControlType::kPosition);
 }; 
 
