@@ -2,6 +2,7 @@
 
 
 void NeoTurnMotor::Configure(SwerveTurnMotorConfig &config){
+    m_pastCommandAngle = -1000000.0;
     m_AbsouluteEncoder = config.absouluteEncoder;
     m_turn_motor = config.turn_motor;
     m_relative_Encoder = config.relative_Encoder;
@@ -14,15 +15,23 @@ void NeoTurnMotor::Configure(SwerveTurnMotorConfig &config){
 };    
 
 void NeoTurnMotor::SetRotation(frc::Rotation2d deg){
-    frc::Rotation2d realTurn = deg - GetRotation();
-    if(realTurn.Degrees().to<double>() > 180.0) {
+    if (std::abs(m_pastCommandAngle-deg.Degrees().to<double>())<= 0.000001)
+    {
+        frc::Rotation2d realTurn = deg - GetRotation();
+        if(realTurn.Degrees().to<double>() > 180.0) {
 
-        realTurn = realTurn - frc::Rotation2d(units::degree_t(360.0));
+            realTurn = realTurn - frc::Rotation2d(units::degree_t(360.0));
 
+        } else if (realTurn.Degrees().to<double>() < -180.0) {
+
+            realTurn = realTurn + frc::Rotation2d(units::degree_t(360.0));
+
+        }
+    
+        double targetPos = m_relative_Encoder->GetPosition() + realTurn.Degrees().to<double>();
+        m_PID->SetReference(targetPos, rev::CANSparkMax::ControlType::kPosition);
+        m_pastCommandAngle = deg.Degrees().to<double>();
     }
-   
-    double targetPos = m_AbsouluteEncoder->GetHeading().Degrees().to<double>() + realTurn.Degrees().to<double>();
-    m_PID->SetReference(targetPos, rev::CANSparkMax::ControlType::kPosition);
 }; 
 
 frc::Rotation2d NeoTurnMotor::GetRotation(){

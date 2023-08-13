@@ -36,4 +36,5 @@ class NeoTurnMotor : public SwerveTurnMotor {
        rev::CANSparkMax *m_turn_motor; 
        rev::SparkMaxRelativeEncoder *m_relative_Encoder;
        rev::SparkMaxPIDController *m_PID; 
+       double m_pastCommandAngle;
 };
