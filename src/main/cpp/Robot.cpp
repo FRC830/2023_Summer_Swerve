@@ -7,6 +7,9 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 void Robot::RobotInit() {
+    frc::SmartDashboard::PutNumber("Speed", 0.0);
+  frc::SmartDashboard::PutNumber("ang", 0.0);
+  frc::SmartDashboard::PutNumber("Target Pose", 0.0);
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
@@ -141,8 +144,7 @@ void Robot::TeleopInit()
 
 
 
-  frc::SmartDashboard::PutNumber("Speed", 0.0);
-  frc::SmartDashboard::PutNumber("ang", 0.0);
+
   
   
 
