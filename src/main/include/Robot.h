@@ -19,6 +19,7 @@
 
 class Robot : public frc::TimedRobot {
  public:
+  void SwerveInit();
   void RobotInit() override;
   void RobotPeriodic() override;
   void AutonomousInit() override;
@@ -44,6 +45,6 @@ class Robot : public frc::TimedRobot {
   NeoTurnMotor m_turnMotor;
   NeoDriveMotor m_driveMotor;
   WPISwerveModule m_swerveModule_BL;
-  // WPISwerveDrive m_swerveDrive;
+  WPISwerveDrive m_swerveDrive;
 
 };

@@ -37,14 +37,14 @@ rev::SparkMaxPIDController fl_drive_pid = fl_drive_mtr.GetPIDController(); */
 // #                  Front Right Module                     #
 // ###########################################################
 // --------------------Absolute Encoder-----------------------
-/* const int FR_ABS_ENC_PORT = 0;
+const int FR_ABS_ENC_PORT = 1;
 const bool FR_ABS_ENC_INVERTED = false;
 const frc::Rotation2d FR_ZERO_HEADING{units::degree_t{0.0f}};
 
 frc::AnalogEncoder fr_abs_enc{FR_ABS_ENC_PORT};
 
 // -----------------------Turn Motor--------------------------
-const int FR_TURN_MTR_ID = 0;
+const int FR_TURN_MTR_ID = 5;
 const bool FR_TURN_MTR_INVERTED = false;
 
 rev::CANSparkMax fr_turn_mtr{FR_TURN_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
@@ -52,11 +52,11 @@ rev::SparkMaxRelativeEncoder fr_turn_enc = fr_turn_mtr.GetEncoder();
 rev::SparkMaxPIDController fr_turn_pid = fr_turn_mtr.GetPIDController();
 
 // -----------------------Drive Motor-------------------------
-const int FR_DRIVE_MTR_ID = 0;
+const int FR_DRIVE_MTR_ID = 1;
 
 rev::CANSparkMax fr_drive_mtr{FR_DRIVE_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
 rev::SparkMaxRelativeEncoder fr_drive_enc = fr_drive_mtr.GetEncoder();
-rev::SparkMaxPIDController fr_drive_pid = fr_drive_mtr.GetPIDController(); */
+rev::SparkMaxPIDController fr_drive_pid = fr_drive_mtr.GetPIDController(); 
 
 
 // ###########################################################
@@ -90,14 +90,14 @@ rev::SparkMaxPIDController bl_drive_pid = bl_drive_mtr.GetPIDController();
 // #                  Back Right Module                      #
 // ###########################################################
 // --------------------Absolute Encoder-----------------------
-/* const int BR_ABS_ENC_PORT = 0;
+const int BR_ABS_ENC_PORT = 3;
 const bool BR_ABS_ENC_INVERTED = false;
 const frc::Rotation2d BR_ZERO_HEADING{units::degree_t{0.0f}};
 
 frc::AnalogEncoder br_abs_enc{BR_ABS_ENC_PORT};
 
 // -----------------------Turn Motor--------------------------
-const int BR_TURN_MTR_ID = 0;
+const int BR_TURN_MTR_ID = 7;
 const bool BR_TURN_MTR_INVERTED = false;
 
 rev::CANSparkMax br_turn_mtr{BR_TURN_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
@@ -105,11 +105,11 @@ rev::SparkMaxRelativeEncoder br_turn_enc = br_turn_mtr.GetEncoder();
 rev::SparkMaxPIDController br_turn_pid = br_turn_mtr.GetPIDController();
 
 // -----------------------Drive Motor-------------------------
-const int BR_DRIVE_MTR_ID = 0;
+const int BR_DRIVE_MTR_ID = 3;
 
 rev::CANSparkMax br_drive_mtr{BR_DRIVE_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
 rev::SparkMaxRelativeEncoder br_drive_enc = br_drive_mtr.GetEncoder();
-rev::SparkMaxPIDController br_drive_pid = br_drive_mtr.GetPIDController(); */
+rev::SparkMaxPIDController br_drive_pid = br_drive_mtr.GetPIDController(); 
 
 
 // ###########################################################

@@ -15,12 +15,12 @@ struct SwerveConfig{
     frc::Translation2d backRightLocation;
 };
 
-class WPISwerveDrive : public SwerveDrive
+class WPISwerveDrive : SwerveDrive
 {
     public:
         WPISwerveDrive() = default;
         virtual ~WPISwerveDrive() = default;
-        virtual void Configure(SwerveConfig &config) = 0;
+        virtual void Configure(SwerveConfig &config) override;
         virtual bool GetEbrake() override;
         virtual void SetEbrake(bool ebrake) override;
         virtual void Drive(double x_position, double y_position, double rotation);
