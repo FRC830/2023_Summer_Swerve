@@ -44,7 +44,6 @@ class Robot : public frc::TimedRobot {
   AnalogAbsoluteEncoder m_ABSencoder;
   NeoTurnMotor m_turnMotor;
   NeoDriveMotor m_driveMotor;
-  WPISwerveModule m_swerveModule_BL;
   WPISwerveDrive m_swerveDrive;
 
 };

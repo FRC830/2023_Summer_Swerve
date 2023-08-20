@@ -7,12 +7,36 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 void Robot::SwerveInit(){
-  
+  AbsoluteEncoderConfig brAbsConfig;
+  AbsoluteEncoderConfig frAbsConfig;
+  AbsoluteEncoderConfig blAbsConfig;
+  AbsoluteEncoderConfig flAbsConfig;
+
+
+  SwerveTurnMotorConfig brTurnConfig;
+  SwerveTurnMotorConfig frTurnConfig;
+  SwerveTurnMotorConfig blTurnConfig;
+  SwerveTurnMotorConfig flTurnConfig;
+
+  SwerveDriveMotorConfig brDriveConfig;
+  SwerveDriveMotorConfig frDriveConfig;
+  SwerveDriveMotorConfig blDriveConfig;
+  SwerveDriveMotorConfig flDriveConfig;
+
+  SwerveModuleConfig brModuleConfig;
+  SwerveModuleConfig frModuleConfig;
+  SwerveModuleConfig blModuleConfig;
+  SwerveModuleConfig flModuleConfig;
+
+  SwerveConfig swerveConfig;
+
+  m_swerveDrive.Configure(swerveConfig);
 
 
 }
 
 void Robot::RobotInit() {
+  SwerveInit();
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
