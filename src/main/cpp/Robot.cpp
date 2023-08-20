@@ -199,6 +199,41 @@ void Robot::TeleopInit()
   // gyro_config.is_inverted = true;
   // gyro_config.zero_heading = units::degree_t(90);
   // gyro.Configure(gyro_config);
+  AbsoluteEncoderConfig fl_encoderConfig;
+  fl_encoderConfig.encoder = &fl_abs_enc;
+  fl_encoderConfig.is_inverted = FL_ABS_ENC_INVERTED;
+  fl_encoderConfig.zero_heading = FL_ZERO_HEADING;
+
+  m_ABSencoder.Configure(fl_encoderConfig);
+  m_ABSencoder.SetZeroHeading(m_ABSencoder.GetRawHeading());
+
+  SwerveTurnMotorConfig fl_turnConfig;
+  fl_turnConfig.absouluteEncoder = &m_ABSencoder;
+  fl_turnConfig.d = TURN_D;
+  fl_turnConfig.deviceID = BL_TURN_MTR_ID;
+  fl_turnConfig.ff = TURN_FF;
+  fl_turnConfig.i = TURN_I;
+  fl_turnConfig.inverted = BL_TURN_MTR_INVERTED;
+  fl_turnConfig.p = TURN_P;
+  fl_turnConfig.PID = &bl_turn_pid;
+  fl_turnConfig.ratio = MOTOR_ROT_TO_DEG;
+  fl_turnConfig.relative_Encoder = &bl_turn_enc;
+  fl_turnConfig.turn_motor = &bl_turn_mtr;
+
+  SwerveDriveMotorConfig fl_driveConfig;
+  fl_driveConfig.d = DRIVE_D;
+  fl_driveConfig.ff = DRIVE_FF;
+  fl_driveConfig.i = DRIVE_I;
+  fl_driveConfig.p = DRIVE_P;
+  fl_driveConfig.PID = &fl_drive_pid;
+  fl_driveConfig.ratio = MOTOR_ROT_TO_FT / 60.0;
+  fl_driveConfig.encoder = &fl_drive_enc;
+  fl_driveConfig.motor = &fl_drive_mtr;
+
+  m_driveMotor.Configure(fl_driveConfig);
+
+
+  m_swerveModule_FL.Configure(moduleConfig);
 
   // AbsoluteEncoderConfig encoderConfig;
   // encoderConfig.encoder = &bl_abs_enc;

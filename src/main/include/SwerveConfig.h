@@ -11,14 +11,14 @@
 // #                  Front Left Module                      #
 // ###########################################################
 // --------------------Absolute Encoder-----------------------
-/* const int FL_ABS_ENC_PORT = 0;
+const int FL_ABS_ENC_PORT = 1;
 const bool FL_ABS_ENC_INVERTED = false;
 const frc::Rotation2d FL_ZERO_HEADING{units::degree_t{0.0f}};
 
 frc::AnalogEncoder fl_abs_enc{FL_ABS_ENC_PORT};
 
 // -----------------------Turn Motor--------------------------
-const int FL_TURN_MTR_ID = 0;
+const int FL_TURN_MTR_ID = 2;
 const bool FL_TURN_MTR_INVERTED = false;
 
 rev::CANSparkMax fl_turn_mtr{FL_TURN_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
@@ -26,11 +26,11 @@ rev::SparkMaxRelativeEncoder fl_turn_enc = fl_turn_mtr.GetEncoder();
 rev::SparkMaxPIDController fl_turn_pid = fl_turn_mtr.GetPIDController();
 
 // -----------------------Drive Motor-------------------------
-const int FL_DRIVE_MTR_ID = 0;
+const int FL_DRIVE_MTR_ID = 6;
 
 rev::CANSparkMax fl_drive_mtr{FL_DRIVE_MTR_ID, rev::CANSparkMax::MotorType::kBrushless};
 rev::SparkMaxRelativeEncoder fl_drive_enc = fl_drive_mtr.GetEncoder();
-rev::SparkMaxPIDController fl_drive_pid = fl_drive_mtr.GetPIDController(); */
+rev::SparkMaxPIDController fl_drive_pid = fl_drive_mtr.GetPIDController();
 
 
 // ###########################################################
