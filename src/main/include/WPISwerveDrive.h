@@ -8,7 +8,7 @@ struct SwerveConfig{
     bool orientation;
     double maxDriveSpeed;
     double maxTurnSpeed;
-    //location of motors relative to the center of the robot
+    // Location of motors relative to the center of the robot
     frc::Translation2d frontLeftLocation;
     frc::Translation2d frontRightLocation;
     frc::Translation2d backLeftLocation;
@@ -33,10 +33,7 @@ class WPISwerveDrive : SwerveDrive
         virtual void SetFieldOriented() override;
         virtual bool GetOrientedMode() override; 
 
-
-
     private:
-
         frc::Translation2d m_frontLeftLocation;
         frc::Translation2d m_frontRightLocation;
         frc::Translation2d m_backLeftLocation;
@@ -50,9 +47,7 @@ class WPISwerveDrive : SwerveDrive
         double m_maxTurnSpeed;
         bool m_ebrake = false;
         bool m_driveMotorIdleMode = false;
-        //false is brake and true is coast
+        // false is brake and true is coast
         bool m_orientation = false;
-        //false is robot orientated, true is FieldOrientated. 
-        
-
+        // false is robot orientated, true is FieldOrientated. 
 };
