@@ -124,42 +124,77 @@ void Robot::TeleopInit()
   // gyro_config.is_inverted = true;
   // gyro_config.zero_heading = units::degree_t(90);
   // gyro.Configure(gyro_config);
+  AbsoluteEncoderConfig fl_encoderConfig;
+  fl_encoderConfig.encoder = &fl_abs_enc;
+  fl_encoderConfig.is_inverted = FL_ABS_ENC_INVERTED;
+  fl_encoderConfig.zero_heading = FL_ZERO_HEADING;
 
-  AbsoluteEncoderConfig encoderConfig;
-  encoderConfig.encoder = &bl_abs_enc;
-  encoderConfig.is_inverted = BL_ABS_ENC_INVERTED;
-  encoderConfig.zero_heading = BL_ZERO_HEADING;
+  m_ABSencoder.Configure(fl_encoderConfig);
+  m_ABSencoder.SetZeroHeading(m_ABSencoder.GetRawHeading());
 
-  m_ABSencoder.Configure(encoderConfig);
+  SwerveTurnMotorConfig fl_turnConfig;
+  fl_turnConfig.absouluteEncoder = &m_ABSencoder;
+  fl_turnConfig.d = TURN_D;
+  fl_turnConfig.deviceID = BL_TURN_MTR_ID;
+  fl_turnConfig.ff = TURN_FF;
+  fl_turnConfig.i = TURN_I;
+  fl_turnConfig.inverted = BL_TURN_MTR_INVERTED;
+  fl_turnConfig.p = TURN_P;
+  fl_turnConfig.PID = &bl_turn_pid;
+  fl_turnConfig.ratio = MOTOR_ROT_TO_DEG;
+  fl_turnConfig.relative_Encoder = &bl_turn_enc;
+  fl_turnConfig.turn_motor = &bl_turn_mtr;
 
+  SwerveDriveMotorConfig fl_driveConfig;
+  fl_driveConfig.d = DRIVE_D;
+  fl_driveConfig.ff = DRIVE_FF;
+  fl_driveConfig.i = DRIVE_I;
+  fl_driveConfig.p = DRIVE_P;
+  fl_driveConfig.PID = &fl_drive_pid;
+  fl_driveConfig.ratio = MOTOR_ROT_TO_FT / 60.0;
+  fl_driveConfig.encoder = &fl_drive_enc;
+  fl_driveConfig.motor = &fl_drive_mtr;
+
+  m_driveMotor.Configure(fl_driveConfig);
+
+
+  m_swerveModule_FL.Configure(moduleConfig);
+
+
+  AbsoluteEncoderConfig bl_encoderConfig;
+  bl_encoderConfig.encoder = &bl_abs_enc;
+  bl_encoderConfig.is_inverted = BL_ABS_ENC_INVERTED;
+  bl_encoderConfig.zero_heading = BL_ZERO_HEADING;
+
+  m_ABSencoder.Configure(bl_encoderConfig);
   m_ABSencoder.SetZeroHeading(m_ABSencoder.GetRawHeading());
   
-  SwerveTurnMotorConfig turnConfig;
-  turnConfig.absouluteEncoder = &m_ABSencoder;
-  turnConfig.d = TURN_D;
-  turnConfig.deviceID = BL_TURN_MTR_ID;
-  turnConfig.ff = TURN_FF;
-  turnConfig.i = TURN_I;
-  turnConfig.inverted = BL_TURN_MTR_INVERTED;
-  turnConfig.p = TURN_P;
-  turnConfig.PID = &bl_turn_pid;
-  turnConfig.ratio = MOTOR_ROT_TO_DEG;
-  turnConfig.relative_Encoder = &bl_turn_enc;
-  turnConfig.turn_motor = &bl_turn_mtr;
+  SwerveTurnMotorConfig bl_turnConfig;
+  bl_turnConfig.absouluteEncoder = &m_ABSencoder;
+  bl_turnConfig.d = TURN_D;
+  bl_turnConfig.deviceID = BL_TURN_MTR_ID;
+  bl_turnConfig.ff = TURN_FF;
+  bl_turnConfig.i = TURN_I;
+  bl_turnConfig.inverted = BL_TURN_MTR_INVERTED;
+  bl_turnConfig.p = TURN_P;
+  bl_turnConfig.PID = &bl_turn_pid;
+  bl_turnConfig.ratio = MOTOR_ROT_TO_DEG;
+  bl_turnConfig.relative_Encoder = &bl_turn_enc;
+  bl_turnConfig.turn_motor = &bl_turn_mtr;
 
-  m_turnMotor.Configure(turnConfig);
+  m_turnMotor.Configure(bl_turnConfig);
 
-  SwerveDriveMotorConfig driveConfig;
-  driveConfig.d = DRIVE_D;
-  driveConfig.ff = DRIVE_FF;
-  driveConfig.i = DRIVE_I;
-  driveConfig.p = DRIVE_P;
-  driveConfig.PID = &bl_drive_pid;
-  driveConfig.ratio = MOTOR_ROT_TO_FT / 60.0;
-  driveConfig.encoder = &bl_drive_enc;
-  driveConfig.motor = &bl_drive_mtr;
+  SwerveDriveMotorConfig bl_driveConfig;
+  bl_driveConfig.d = DRIVE_D;
+  bl_driveConfig.ff = DRIVE_FF;
+  bl_driveConfig.i = DRIVE_I;
+  bl_driveConfig.p = DRIVE_P;
+  bl_driveConfig.PID = &bl_drive_pid;
+  bl_driveConfig.ratio = MOTOR_ROT_TO_FT / 60.0;
+  bl_driveConfig.encoder = &bl_drive_enc;
+  bl_driveConfig.motor = &bl_drive_mtr;
 
-  m_driveMotor.Configure(driveConfig);
+  m_driveMotor.Configure(bl_driveConfig);
 
   
   SwerveModuleConfig moduleConfig;
