@@ -177,6 +177,12 @@ void Robot::SwerveInit(){
   swerveConfig.maxDriveSpeed=MAX_DRIVE_SPEED_MPS;
   swerveConfig.maxTurnSpeed=MAX_ANGULAR_VELOCITY_DEGPS;
   swerveConfig.orientation=IS_ROBOT_ORIENTED_DRIVE;
+  swerveConfig.modules.emplace_back(flModule);
+  swerveConfig.modules.emplace_back(frModule);
+  swerveConfig.modules.emplace_back(blModule);
+  swerveConfig.modules.emplace_back(brModule);
+  WPISwerveDrive swerve;
+  swerve.Configure(swerveConfig);
 
 }
 
