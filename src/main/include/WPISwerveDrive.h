@@ -13,6 +13,7 @@ struct SwerveConfig{
     frc::Translation2d frontRightLocation;
     frc::Translation2d backLeftLocation;
     frc::Translation2d backRightLocation;
+    std::vector<SwerveModule&> modules;
 };
 
 class WPISwerveDrive : SwerveDrive
@@ -42,7 +43,7 @@ class WPISwerveDrive : SwerveDrive
         frc::Translation2d m_backLeftLocation;
         frc::Translation2d m_backRightLocation;
         
-        std::vector<SwerveModule> m_modules;
+        std::vector<SwerveModule&> m_modules;
 
         std::vector<frc::SwerveModuleState> m_states;
         
