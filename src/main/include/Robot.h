@@ -17,6 +17,7 @@
 #include "SwerveConfig.h"
 #include "NavXGyro.h"
 #include <array>
+#include <frc/XboxController.h>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -47,6 +48,7 @@ class Robot : public frc::TimedRobot {
   std::array<NeoDriveMotor, NUM_MODULES> _drive_motors;
   std::array<WPISwerveModule, NUM_MODULES> _modules;
   WPISwerveDrive _swerve;
+  frc::XboxController _xbox_controller{0};
 
   NavXGyro gyro;
 };

@@ -5,12 +5,15 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     m_maxDriveSpeed = config.maxDriveSpeed;
     m_maxTurnSpeed = config.maxTurnSpeed;
     m_orientation = config.orientation;
-    frc::Translation2d m_frontLeftLocation = config.frontLeftLocation;
-    frc::Translation2d m_frontRightLocation = config.frontRightLocation;
-    frc::Translation2d m_backLeftLocation = config.backLeftLocation;
-    frc::Translation2d m_backRightLocation = config.backRightLocation;
+    m_frontLeftLocation = config.frontLeftLocation;
+    m_frontRightLocation = config.frontRightLocation;
+    m_backLeftLocation = config.backLeftLocation;
+    m_backRightLocation = config.backRightLocation;
     SetIdleMode(config.idle_mode);
     //m_modules = config.modules;
+    m_kinematics = new frc::SwerveDriveKinematics(
+    m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation,
+    m_backRightLocation);
 }
 
 
@@ -33,17 +36,11 @@ void WPISwerveDrive::Drive(units::feet_per_second_t vx, units::feet_per_second_t
 
 }
 void WPISwerveDrive::Drive(frc::ChassisSpeeds speed) {
-
-
-    frc::SwerveDriveKinematics<4> m_kinematics{
-    m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation,
-    m_backRightLocation};
- 
-
-    // states = m_kinematics.ToSwerveModuleStates(speed);
-    auto states = m_kinematics.ToSwerveModuleStates(speed);
     
-    m_kinematics.DesaturateWheelSpeeds(&states, units::feet_per_second_t(m_maxDriveSpeed));
+    // states = m_kinematics.ToSwerveModuleStates(speed);
+    auto states = m_kinematics->ToSwerveModuleStates(speed);
+    
+    m_kinematics->DesaturateWheelSpeeds(&states, units::feet_per_second_t(m_maxDriveSpeed));
 
 
     std::vector<frc::SwerveModuleState> stateN;

@@ -46,6 +46,8 @@ class WPISwerveDrive : public SwerveDrive
         frc::Translation2d m_frontRightLocation;
         frc::Translation2d m_backLeftLocation;
         frc::Translation2d m_backRightLocation;
+
+        frc::SwerveDriveKinematics<4>* m_kinematics;
         
         std::array<SwerveModule*, 4> m_modules;
 

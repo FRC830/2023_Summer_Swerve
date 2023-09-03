@@ -363,6 +363,13 @@ void Robot::TeleopPeriodic()
   frc::SmartDashboard::PutNumber("FR Velocity", fr_drive_enc.GetVelocity());
   frc::SmartDashboard::PutNumber("BL Velocity", bl_drive_enc.GetVelocity());
   frc::SmartDashboard::PutNumber("BR Velocity", br_drive_enc.GetVelocity());
+
+  // XBox controller
+  double left_x = _xbox_controller.GetLeftX();
+  double left_y = _xbox_controller.GetLeftY();
+  double right_x = _xbox_controller.GetRightX();
+
+  _swerve.Drive(left_x, left_y, right_x);
 }
 
 void Robot::DisabledInit() {}

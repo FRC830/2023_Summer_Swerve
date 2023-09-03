@@ -115,8 +115,8 @@ rev::SparkMaxPIDController br_drive_pid = br_drive_mtr.GetPIDController();
 // ###########################################################
 // #                     Swerve Drive                        #
 // ###########################################################
-const double ROBOT_WIDTH_M = 0.5;
-const double ROBOT_LENGTH_M = 0.5;
+const double ROBOT_WIDTH_M = 0.63;
+const double ROBOT_LENGTH_M = 0.63;
 
 const frc::Translation2d fl_position(units::meter_t{ROBOT_LENGTH_M / 2.0}, units::meter_t{ROBOT_WIDTH_M / 2.0});
 const frc::Translation2d fr_position(units::meter_t{ROBOT_LENGTH_M / 2.0}, units::meter_t{-ROBOT_WIDTH_M / 2.0});
