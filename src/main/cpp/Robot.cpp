@@ -43,7 +43,7 @@ void Robot::SwerveInit(){
   turn_config.i=TURN_I;
   turn_config.d=TURN_D;
   turn_config.ff=TURN_FF;
-  turn_config.ratio=TURN_GEAR_RATIO;
+  turn_config.ratio=MOTOR_ROT_TO_DEG;
 
   turn_config.deviceID=FL_TURN_MTR_ID;
   turn_config.absouluteEncoder=&_abs_encoders[ModulePosition::FL];
@@ -336,12 +336,35 @@ void Robot::TeleopPeriodic()
   auto speed = frc::SmartDashboard::GetNumber("Speed", 0.0);
   auto angle = frc::SmartDashboard::GetNumber("ang", 0.0);
 
-  frc::SwerveModuleState state{units::feet_per_second_t(speed), units::degree_t(angle)};
+  frc::SwerveModuleState state{units::feet_per_second_t(1), units::degree_t(0)};
   //bl_turn_pid.SetReference(angle, rev::CANSparkMax::ControlType::kPosition);
   //m_swerveModule_BL.SetState(state);
+  // for (int i = 0; i < 4; i++) 
+  // {
+  //   _modules[i].SetState(state);
+  // }
+  _modules[1].SetState(state);
 
   
   // frc::SmartDashboard::PutNumber("Set Position", sp);
+
+  // Raw heading of absolute encoders
+  frc::SmartDashboard::PutNumber("FL Raw Heading", double(_abs_encoders[0].GetRawHeading().Degrees()));
+  frc::SmartDashboard::PutNumber("FR Raw Heading", double(_abs_encoders[1].GetRawHeading().Degrees()));
+  frc::SmartDashboard::PutNumber("BL Raw Heading", double(_abs_encoders[2].GetRawHeading().Degrees()));
+  frc::SmartDashboard::PutNumber("BR Raw Heading", double(_abs_encoders[3].GetRawHeading().Degrees()));
+
+  // Heading of turn motors
+  frc::SmartDashboard::PutNumber("FL Heading", fl_turn_enc.GetPosition());
+  frc::SmartDashboard::PutNumber("FR Heading", fr_turn_enc.GetPosition());
+  frc::SmartDashboard::PutNumber("BL Heading", bl_turn_enc.GetPosition());
+  frc::SmartDashboard::PutNumber("BR Heading", br_turn_enc.GetPosition());
+
+  // Velocity of drive motors
+  frc::SmartDashboard::PutNumber("FL Velocity", fl_drive_enc.GetVelocity());
+  frc::SmartDashboard::PutNumber("FR Velocity", fr_drive_enc.GetVelocity());
+  frc::SmartDashboard::PutNumber("BL Velocity", bl_drive_enc.GetVelocity());
+  frc::SmartDashboard::PutNumber("BR Velocity", br_drive_enc.GetVelocity());
 }
 
 void Robot::DisabledInit() {}

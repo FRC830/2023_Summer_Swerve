@@ -20,7 +20,7 @@ void NeoTurnMotor::Configure(SwerveTurnMotorConfig &config){
 };    
 
 void NeoTurnMotor::SetRotation(frc::Rotation2d deg){
-    if (std::abs(m_pastCommandAngle-deg.Degrees().to<double>())<= 0.000001)
+    if (std::abs(m_pastCommandAngle-deg.Degrees().to<double>()) > 0.000001)
     {
         frc::Rotation2d realTurn = deg - GetRotation();
         if(realTurn.Degrees().to<double>() > 180.0) {
