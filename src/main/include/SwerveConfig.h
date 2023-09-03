@@ -150,7 +150,7 @@ const frc::Rotation2d GYRO_ZERO_HEADING{units::degree_t{0.0f}};
 
 // --------------------------Swerve---------------------------
 const double MAX_DRIVE_SPEED_MPS = 15.0;
-const double MAX_ANGULAR_VELOCITY_DEGPS = 90.0;
+const double MAX_ANGULAR_VELOCITY_DEGPS = 60.0;
 
 const bool IS_DRIVE_IN_COAST = false;
 const bool IS_ROBOT_ORIENTED_DRIVE = false;
