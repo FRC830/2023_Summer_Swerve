@@ -2,6 +2,8 @@
 #include "Interfaces/SwerveDrive.h"
 #include "Interfaces/SwerveModule.h"
 
+#include <array>
+
 struct SwerveConfig{
     bool idle_mode;
     bool ebrake;
@@ -13,10 +15,10 @@ struct SwerveConfig{
     frc::Translation2d frontRightLocation;
     frc::Translation2d backLeftLocation;
     frc::Translation2d backRightLocation;
-    std::vector<SwerveModule&> modules;
+    //std::array<SwerveModule, 4>& modules;
 };
 
-class WPISwerveDrive : SwerveDrive
+class WPISwerveDrive : public SwerveDrive
 {
     public:
         WPISwerveDrive() = default;
@@ -34,13 +36,18 @@ class WPISwerveDrive : SwerveDrive
         virtual void SetFieldOriented() override;
         virtual bool GetOrientedMode() override; 
 
+        inline std::array<SwerveModule*, 4>* GetModules()
+        {
+            return &m_modules;
+        }
+
     private:
         frc::Translation2d m_frontLeftLocation;
         frc::Translation2d m_frontRightLocation;
         frc::Translation2d m_backLeftLocation;
         frc::Translation2d m_backRightLocation;
         
-        std::vector<SwerveModule&> m_modules;
+        std::array<SwerveModule*, 4> m_modules;
 
         std::vector<frc::SwerveModuleState> m_states;
         

@@ -7,9 +7,14 @@ void NeoTurnMotor::Configure(SwerveTurnMotorConfig &config){
     m_turn_motor = config.turn_motor;
     m_relative_Encoder = config.relative_Encoder;
     m_PID = config.PID;
+    m_turn_motor->RestoreFactoryDefaults();
     m_turn_motor->SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-    
+    m_PID->SetP(config.p);
+    m_PID->SetI(config.i);
+    m_PID->SetD(config.d);
+    m_PID->SetFF(config.ff);
     m_relative_Encoder->SetPositionConversionFactor(config.ratio);
+    m_turn_motor->SetSmartCurrentLimit(20);
     SetInverted(config.inverted);
     m_turn_motor->BurnFlash();
 };    

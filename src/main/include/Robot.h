@@ -16,6 +16,7 @@
 #include <iostream>
 #include "SwerveConfig.h"
 #include "NavXGyro.h"
+#include <array>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -34,16 +35,18 @@ class Robot : public frc::TimedRobot {
   void SimulationPeriodic() override;
 
  private:
+  static const int NUM_MODULES = 4;
+
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
-  AnalogAbsoluteEncoder m_back_left_analog_encoder;
-  NeoTurnMotor m_back_left_turn_motor;
-  NavXGyro gyro;
-  AnalogAbsoluteEncoder m_ABSencoder;
-  NeoTurnMotor m_turnMotor;
-  NeoDriveMotor m_driveMotor;
-  WPISwerveDrive m_swerveDrive;
+  
+  std::array<AnalogAbsoluteEncoder, NUM_MODULES> _abs_encoders;
+  std::array<NeoTurnMotor, NUM_MODULES> _turn_motors;
+  std::array<NeoDriveMotor, NUM_MODULES> _drive_motors;
+  std::array<WPISwerveModule, NUM_MODULES> _modules;
+  WPISwerveDrive _swerve;
 
+  NavXGyro gyro;
 };

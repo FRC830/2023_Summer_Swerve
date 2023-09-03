@@ -11,7 +11,7 @@ struct SwerveModuleConfig
     SwerveTurnMotor *turnMotor;
 };
 
-class WPISwerveModule : SwerveModule
+class WPISwerveModule : public SwerveModule
 {
     public:
         WPISwerveModule() = default;

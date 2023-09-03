@@ -137,9 +137,9 @@ const double DRIVE_GEAR_RATIO = 5.5;
 const double WHEEL_DIAMETER_FT = 0.333; // 4 inches
 const double MOTOR_ROT_TO_FT = (WHEEL_DIAMETER_FT * 3.14159) / DRIVE_GEAR_RATIO;
 
-const double DRIVE_P = 0.000002;
+const double DRIVE_P = 0.08;
 const double DRIVE_I = 0.0;
-const double DRIVE_D = 0.001;
+const double DRIVE_D = 0.1;
 const double DRIVE_FF = 0.0;
 
 // --------------------------Gyro-----------------------------

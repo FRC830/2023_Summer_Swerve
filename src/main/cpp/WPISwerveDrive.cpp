@@ -10,7 +10,7 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     frc::Translation2d m_backLeftLocation = config.backLeftLocation;
     frc::Translation2d m_backRightLocation = config.backRightLocation;
     SetIdleMode(config.idle_mode);
-    m_modules = config.modules;
+    //m_modules = config.modules;
 }
 
 
@@ -59,7 +59,7 @@ void WPISwerveDrive::Drive(std::vector<frc::SwerveModuleState> &state) {
     if (!m_ebrake) {
         for(int i = 0; i < state.size(); i++){
 
-            m_modules[i].SetState(state[i]);
+            m_modules[i]->SetState(state[i]);
 
         }
     }
@@ -70,7 +70,7 @@ bool WPISwerveDrive::GetIdleMode() {
 void WPISwerveDrive::SetIdleMode(bool idle_mode) {
      for(int i = 0; i < m_modules.size(); i++){
 
-        m_modules[i].SetIdleMode(idle_mode);
+        m_modules[i]->SetIdleMode(idle_mode);
 
     }
 }
