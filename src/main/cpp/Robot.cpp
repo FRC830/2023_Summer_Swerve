@@ -368,8 +368,8 @@ void Robot::TeleopPeriodic()
   double left_x = _xbox_controller.GetLeftX();
   double left_y = _xbox_controller.GetLeftY();
   double right_x = _xbox_controller.GetRightX();
-
-  _swerve.Drive(left_x, left_y, right_x);
+  // TODO: Add deadzone to correct joystick drift
+  _swerve.Drive(left_y, left_x, -right_x);
 }
 
 void Robot::DisabledInit() {}
