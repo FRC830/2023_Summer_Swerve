@@ -65,7 +65,7 @@ rev::SparkMaxPIDController fr_drive_pid = fr_drive_mtr.GetPIDController();
 // --------------------Absolute Encoder-----------------------
 const int BL_ABS_ENC_PORT = 2;
 const bool BL_ABS_ENC_INVERTED = false;
-const frc::Rotation2d BL_ZERO_HEADING{units::degree_t{0.0f}};
+const frc::Rotation2d BL_ZERO_HEADING{units::degree_t{301.1f}};
 
 frc::AnalogEncoder bl_abs_enc{BL_ABS_ENC_PORT};
 
