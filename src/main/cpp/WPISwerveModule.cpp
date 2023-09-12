@@ -15,11 +15,13 @@ void WPISwerveModule::SetState(frc::SwerveModuleState state)
     m_driveMotor->SetVelocity(state.speed);
 };
 
-frc::SwerveModuleState WPISwerveModule::GetState()
+frc::SwerveModuleState WPISwerveModule::GetState() 
 {
- auto angle = m_turnMotor->GetRotation();
- auto speed = m_driveMotor->GetVelocity();
- return frc::SwerveModuleState(units::feet_per_second_t(speed),angle);
+    frc::Rotation2d angle = m_turnMotor->GetRotation();
+    double speed = m_driveMotor->GetVelocity();
+    //
+    frc::SwerveModuleState state{units::meters_per_second_t(units::feet_per_second_t(speed)),angle};
+    return state;
 };
 
 void WPISwerveModule::SetIdleMode(bool idleMode)

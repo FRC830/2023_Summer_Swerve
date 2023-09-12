@@ -26,7 +26,10 @@ void WPISwerveDrive::SetEbrake(bool ebrake) {
 void WPISwerveDrive::Drive(double x_position, double y_position, double rotation) {
     
 
-     Drive(frc::ChassisSpeeds((units::feet_per_second_t)x_position * m_maxDriveSpeed, (units::feet_per_second_t)y_position * m_maxDriveSpeed, (units::degrees_per_second_t)rotation * m_maxTurnSpeed));
+     Drive(
+     (units::feet_per_second_t)x_position * m_maxDriveSpeed, 
+     (units::feet_per_second_t)y_position * m_maxDriveSpeed, 
+     (units::degrees_per_second_t)rotation * m_maxTurnSpeed);
 
 }
 
