@@ -23,6 +23,8 @@ bool WPISwerveDrive::GetEbrake() {
 void WPISwerveDrive::SetEbrake(bool ebrake) {
     m_ebrake = ebrake;
 }
+
+// Robot oriented drive
 void WPISwerveDrive::Drive(double x_position, double y_position, double rotation) {
     
 
@@ -39,6 +41,25 @@ void WPISwerveDrive::Drive(units::feet_per_second_t vx, units::feet_per_second_t
     
 
 }
+
+// Field oriented drive
+void WPISwerveDrive::Drive(double x_position, double y_position, double rotation, double heading) {
+    
+
+     Drive(
+     (units::feet_per_second_t)x_position * m_maxDriveSpeed, 
+     (units::feet_per_second_t)y_position * m_maxDriveSpeed, 
+     (units::degrees_per_second_t)rotation * m_maxTurnSpeed,
+     (units::degree_t) heading);
+}
+
+void WPISwerveDrive::Drive(units::feet_per_second_t vx, units::feet_per_second_t vy, units::degrees_per_second_t omega, units::degree_t heading) {
+
+    Drive(frc::ChassisSpeeds::FromFieldRelativeSpeeds(vx, vy, omega, heading));   
+
+}
+
+// Shared drive functions
 void WPISwerveDrive::Drive(frc::ChassisSpeeds speed) {
     
     // states = m_kinematics.ToSwerveModuleStates(speed);
@@ -56,6 +77,7 @@ void WPISwerveDrive::Drive(frc::ChassisSpeeds speed) {
     Drive(stateN);
 
 }
+
 void WPISwerveDrive::Drive(std::vector<frc::SwerveModuleState> &state) {
     if (!m_ebrake) {
         for(int i = 0; i < state.size(); i++){

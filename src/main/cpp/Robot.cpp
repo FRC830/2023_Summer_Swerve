@@ -219,11 +219,11 @@ void Robot::TeleopInit()
   // m_back_left_analog_encoder.Configure(absolute_encoder_config);
   // m_back_left_analog_encoder.SetZeroHeading(m_back_left_analog_encoder.GetRawHeading());
 
-  // // NavX Gyro Configuration
-  // GyroConfig gyro_config;
-  // gyro_config.is_inverted = true;
-  // gyro_config.zero_heading = units::degree_t(90);
-  // gyro.Configure(gyro_config);
+  // NavX Gyro Configuration
+  GyroConfig gyro_config;
+  gyro_config.is_inverted = true;
+  gyro_config.zero_heading = units::degree_t(90);
+  gyro.Configure(gyro_config);
   // AbsoluteEncoderConfig fl_encoderConfig;
   // fl_encoderConfig.encoder = &fl_abs_enc;
   // fl_encoderConfig.is_inverted = FL_ABS_ENC_INVERTED;
@@ -369,7 +369,16 @@ void Robot::TeleopPeriodic()
   double left_y = _xbox_controller.GetLeftY();
   double right_x = _xbox_controller.GetRightX();
   // TODO: Add deadzone to correct joystick drift
-  _swerve.Drive(left_y, left_x, -right_x);
+  // Not adding deadzone to isolate if gyro integration is working
+
+  if (!_swerve.GetOrientedMode())
+  {
+    _swerve.Drive(left_y, left_x, -right_x);
+  }
+  else
+  {
+    _swerve.Drive(left_y, left_x, -right_x, static_cast<double>(gyro.GetHeading().Degrees()));
+  }
 }
 
 void Robot::DisabledInit() {}
