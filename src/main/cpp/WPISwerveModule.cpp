@@ -10,6 +10,7 @@ void WPISwerveModule::Configure(SwerveModuleConfig &config)
 
 void WPISwerveModule::SetState(frc::SwerveModuleState state)
 {
+    state.angle = state.angle + frc::Rotation2d(180_deg); 
     frc::SwerveModuleState::Optimize(state, m_turnMotor->GetRotation());
     m_turnMotor->SetRotation(state.angle);
     m_driveMotor->SetVelocity(state.speed);
