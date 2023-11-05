@@ -2,6 +2,8 @@
 #include "Interfaces/SwerveModule.h"
 #include "Interfaces/SwerveDriveMotor.h"
 #include "Interfaces/SwerveTurnMotor.h"
+#include <units/angle.h>
+
 struct SwerveModuleConfig
 {
     bool idleMode;
@@ -19,6 +21,7 @@ public:
     virtual frc::SwerveModuleState GetState() override;
     virtual void SetIdleMode(bool idleMode) override;
     virtual bool GetIdleMode() override;
+    virtual frc::SwerveModuleState Optimize(frc::SwerveModuleState desiredState, frc::Rotation2d currentHeading);
     virtual void Configure(SwerveModuleConfig &config) override;
 
 private:

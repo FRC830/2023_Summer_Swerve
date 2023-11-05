@@ -8,12 +8,53 @@ void WPISwerveModule::Configure(SwerveModuleConfig &config)
 
 };
 
+frc::SwerveModuleState WPISwerveModule::Optimize(frc::SwerveModuleState desiredState, frc::Rotation2d currentHeading){
+
+    auto delta = desiredState.angle - currentHeading;
+    if (units::math::abs(delta.Degrees()) > 180_deg) {
+
+        return frc::SwerveModuleState(-desiredState.speed, desiredState.angle + frc::Rotation2d{180_deg});
+
+    } else {
+
+        return {desiredState.speed, desiredState.angle};
+
+    }
+
+
+}
+
 void WPISwerveModule::SetState(frc::SwerveModuleState state)
 {
-    state.angle = state.angle + frc::Rotation2d(180_deg); 
-    frc::SwerveModuleState::Optimize(state, m_turnMotor->GetRotation());
-    m_turnMotor->SetRotation(state.angle);
-    m_driveMotor->SetVelocity(state.speed);
+
+    //seems like that this didn't read the documetation optimize returns stuff. 
+    // state.angle = state.angle + frc::Rotation2d(180_deg); 
+    // frc::SwerveModuleState::Optimize(state, m_turnMotor->GetRotation());
+    // m_turnMotor->SetRotation(state.angle);
+    // m_driveMotor->SetVelocity(state.speed);
+
+    //Proposed solution
+    // state.angle = state.angle + frc::Rotation2d(180_deg); 
+    // auto newState = frc::SwerveModuleState::Optimize(state, m_turnMotor->GetRotation());
+    // m_turnMotor->SetRotation(newState.angle);
+    // m_driveMotor->SetVelocity(newState.speed);
+
+    //Requested solution
+    double fixed_heading = state.angle.Degrees().to<double>();
+    fixed_heading = std::fmod(fixed_heading, 360.0);
+    auto newState = Optimize(frc::SwerveModuleState(state.speed, frc::Rotation2d(units::degree_t{fixed_heading})), m_turnMotor->GetRotation());
+    // units::degrees_t {units::degrees_t{std::fmod(
+    //         newState.angle.Degrees().to<double>(), 360.0)}};
+    m_turnMotor->SetRotation(frc::Rotation2d(units::degree_t (
+        std::fmod(
+            newState.angle.Degrees()
+            .to<double>()
+            , 360.0)
+            
+    ))
+            );
+    m_driveMotor->SetVelocity(newState.speed);
+
 };
 
 frc::SwerveModuleState WPISwerveModule::GetState()
