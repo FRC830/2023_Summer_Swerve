@@ -116,6 +116,10 @@ void Robot::SwerveInit(){
     _modules[i].Configure(module_config);
   }
   
+  GyroConfig gyroConfig;
+  gyroConfig.is_inverted = GYRO_INVERTED;
+  gyroConfig.zero_heading = GYRO_ZERO_HEADING;
+  _gyro.Configure(gyroConfig);
 
   SwerveConfig swerveConfig;
   swerveConfig.backLeftLocation=bl_position;
@@ -128,12 +132,14 @@ void Robot::SwerveInit(){
   swerveConfig.maxTurnSpeed=MAX_ANGULAR_VELOCITY_DEGPS;
   swerveConfig.orientation=IS_ROBOT_ORIENTED_DRIVE;
   swerveConfig.deadzone=CONTROLLER_DEADZONE;
+  swerveConfig.gyro=&_gyro;
   auto* temp = _swerve.GetModules();
   for (int i = 0; i < 4; ++i)
   {
     (*temp)[i] = &_modules[i];
   }
   _swerve.Configure(swerveConfig);
+
 }
 
 void Robot::RobotInit() {
@@ -352,6 +358,7 @@ void Robot::TeleopPeriodic()
   frc::SmartDashboard::PutNumber("FR Raw Heading", double(_abs_encoders[1].GetRawHeading().Degrees()));
   frc::SmartDashboard::PutNumber("BL Raw Heading", double(_abs_encoders[2].GetRawHeading().Degrees()));
   frc::SmartDashboard::PutNumber("BR Raw Heading", double(_abs_encoders[3].GetRawHeading().Degrees()));
+  frc::SmartDashboard::PutNumber("Gyro Heading", _gyro.GetHeading().Degrees().to<double>());
 
   // Heading of turn motors
   frc::SmartDashboard::PutNumber("FL Heading", fl_turn_enc.GetPosition());

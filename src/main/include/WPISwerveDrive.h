@@ -1,6 +1,7 @@
 #pragma once
 #include "Interfaces/SwerveDrive.h"
 #include "Interfaces/SwerveModule.h"
+#include "Interfaces/SwerveGyro.h"
 
 #include <array>
 
@@ -11,6 +12,7 @@ struct SwerveConfig{
     double maxDriveSpeed;
     double maxTurnSpeed;
     double deadzone;
+    SwerveGyro *gyro;
     // Location of motors relative to the center of the robot
     frc::Translation2d frontLeftLocation;
     frc::Translation2d frontRightLocation;
@@ -64,4 +66,5 @@ class WPISwerveDrive : public SwerveDrive
         double m_deadzone;
 
         double ApplyDeadzone(double input);
+        SwerveGyro *m_gyro;
 };

@@ -50,5 +50,5 @@ class Robot : public frc::TimedRobot {
   WPISwerveDrive _swerve;
   frc::XboxController _xbox_controller{0};
 
-  NavXGyro gyro;
+  NavXGyro _gyro;
 };

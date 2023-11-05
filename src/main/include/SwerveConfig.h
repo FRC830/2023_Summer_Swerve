@@ -143,7 +143,7 @@ const double DRIVE_D = 0.1;
 const double DRIVE_FF = 0.0;
 
 // --------------------------Gyro-----------------------------
-const bool GYRO_INVERTED = false;
+const bool GYRO_INVERTED = true;
 const frc::Rotation2d GYRO_ZERO_HEADING{units::degree_t{0.0f}};
 
 // AHRS robot_gyro{frc::SPI::Port::kMXP};
