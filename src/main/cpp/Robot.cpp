@@ -20,7 +20,7 @@ void Robot::SwerveInit(){
   abs_config.encoder = &fl_abs_enc;
   abs_config.is_inverted = FL_ABS_ENC_INVERTED;
   abs_config.zero_heading = FL_ZERO_HEADING;
-  _abs_encoders[ModulePosition::FL].Configure(abs_config)
+  _abs_encoders[ModulePosition::FL].Configure(abs_config);
 
   abs_config.encoder = &fr_abs_enc;
   abs_config.is_inverted = FR_ABS_ENC_INVERTED;
