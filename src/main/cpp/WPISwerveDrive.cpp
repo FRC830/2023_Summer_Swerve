@@ -14,6 +14,7 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     m_kinematics = new frc::SwerveDriveKinematics(
     m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation,
     m_backRightLocation);
+    m_deadzone = config.deadzone;
 }
 
 

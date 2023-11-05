@@ -127,6 +127,7 @@ void Robot::SwerveInit(){
   swerveConfig.maxDriveSpeed=MAX_DRIVE_SPEED_MPS;
   swerveConfig.maxTurnSpeed=MAX_ANGULAR_VELOCITY_DEGPS;
   swerveConfig.orientation=IS_ROBOT_ORIENTED_DRIVE;
+  swerveConfig.deadzone=CONTROLLER_DEADZONE;
   auto* temp = _swerve.GetModules();
   for (int i = 0; i < 4; ++i)
   {
