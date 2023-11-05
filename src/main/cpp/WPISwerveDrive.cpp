@@ -26,6 +26,9 @@ void WPISwerveDrive::SetEbrake(bool ebrake) {
     m_ebrake = ebrake;
 }
 void WPISwerveDrive::Drive(double x_position, double y_position, double rotation) {
+    x_position = ApplyDeadzone(x_position);
+    y_position = ApplyDeadzone(y_position);
+    
      Drive(
      (units::feet_per_second_t)x_position * m_maxDriveSpeed, 
      (units::feet_per_second_t)y_position * m_maxDriveSpeed, 
