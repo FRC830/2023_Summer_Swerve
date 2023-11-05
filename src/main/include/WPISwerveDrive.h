@@ -62,4 +62,6 @@ class WPISwerveDrive : public SwerveDrive
         bool m_orientation = false;
         // false is robot orientated, true is FieldOrientated. 
         double m_deadzone;
+
+        double ApplyDeadzone(double input);
 };

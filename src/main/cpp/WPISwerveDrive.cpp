@@ -25,13 +25,10 @@ void WPISwerveDrive::SetEbrake(bool ebrake) {
     m_ebrake = ebrake;
 }
 void WPISwerveDrive::Drive(double x_position, double y_position, double rotation) {
-    
-
      Drive(
      (units::feet_per_second_t)x_position * m_maxDriveSpeed, 
      (units::feet_per_second_t)y_position * m_maxDriveSpeed, 
      (units::degrees_per_second_t)rotation * m_maxTurnSpeed);
-
 }
 
 void WPISwerveDrive::Drive(units::feet_per_second_t vx, units::feet_per_second_t vy, units::degrees_per_second_t omega) {
@@ -66,9 +63,11 @@ void WPISwerveDrive::Drive(std::vector<frc::SwerveModuleState> &state) {
         }
     }
 } 
+
 bool WPISwerveDrive::GetIdleMode() {
     return false;
 }
+
 void WPISwerveDrive::SetIdleMode(bool idle_mode) {
      for(int i = 0; i < m_modules.size(); i++){
 
@@ -84,4 +83,20 @@ void WPISwerveDrive::SetFieldOriented() {
 }
 bool WPISwerveDrive::GetOrientedMode() {
     return m_orientation;
+}
+
+double WPISwerveDrive::ApplyDeadzone(double input)
+{
+    double output = 0;
+
+    if (input > m_deadzone)
+    {
+        output = (input - m_deadzone) / (1 - m_deadzone);
+    }
+    else if (input < -(m_deadzone))
+    {
+        output = (input + m_deadzone) / (1 - m_deadzone);
+    }
+
+    return output;
 }

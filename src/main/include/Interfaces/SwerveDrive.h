@@ -1,3 +1,4 @@
+
 #pragma once
 #include <frc/geometry/Translation2d.h>
 #include <frc/kinematics/ChassisSpeeds.h>
@@ -27,5 +28,5 @@ class SwerveDrive
         virtual bool GetOrientedMode() = 0; 
 
     private:
-
+        
 };
