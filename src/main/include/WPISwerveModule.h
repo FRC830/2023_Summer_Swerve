@@ -21,6 +21,7 @@ class WPISwerveModule : public SwerveModule
         virtual void SetIdleMode(bool idleMode) override;
         virtual bool GetIdleMode() override;
         virtual void Configure(SwerveModuleConfig &config) override;
+        virtual frc::SwerveModuleState Optimize(frc::SwerveModuleState desiredState, frc::Rotation2d currentHeading);
 
     private:
         bool m_idleMode;
