@@ -128,7 +128,7 @@ void Robot::SwerveInit(){
   swerveConfig.frontLeftLocation=fl_position;
   swerveConfig.frontRightLocation=fr_position;
   swerveConfig.idle_mode=IS_DRIVE_IN_COAST;
-  swerveConfig.maxDriveSpeed=MAX_DRIVE_SPEED_MPS;
+  swerveConfig.maxDriveSpeed=MAX_DRIVE_SPEED_FPS;
   swerveConfig.maxTurnSpeed=MAX_ANGULAR_VELOCITY_DEGPS;
   swerveConfig.orientation=IS_ROBOT_ORIENTED_DRIVE;
   swerveConfig.deadzone=CONTROLLER_DEADZONE;
