@@ -84,6 +84,7 @@ void Robot::SwerveInit(){
   drive_config.d = DRIVE_D;
   drive_config.ff = DRIVE_FF;
   drive_config.ratio = MOTOR_ROT_TO_FT / 60.0;
+  drive_config.correction_factor = POSITION_CORRECTION_FACTOR;
   
   drive_config.PID = &fl_drive_pid;
   drive_config.encoder = &fl_drive_enc;
@@ -324,6 +325,12 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic() 
 {
+  // TEMPORARY - for finding conversion factor
+  frc::SmartDashboard::PutNumber("FL Drive Motor Rotations", fl_drive_enc.GetPosition());
+  frc::SmartDashboard::PutNumber("FR Drive Motor Rotations", fr_drive_enc.GetPosition());
+  frc::SmartDashboard::PutNumber("BR Drive Motor Rotations", br_drive_enc.GetPosition());
+  frc::SmartDashboard::PutNumber("BL Drive Motor Rotations", bl_drive_enc.GetPosition());
+
   // //m_back_left_turn_motor.SetRotation(frc::Rotation2d(static_cast<units::degree_t>(frc::SmartDashboard::GetNumber("backleft turn motor position", 69))));
   // //std::cout << "\rCurrent motor heading/positon:\t" << static_cast<double>(m_back_left_analog_encoder.GetHeading().Degrees()) << "\tsoftware motor positon" << frc::SmartDashboard::GetNumber("backleft turn motor position", 69);
   // double p = frc::SmartDashboard::GetNumber("p", 1);

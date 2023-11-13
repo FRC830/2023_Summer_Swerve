@@ -15,7 +15,7 @@ class SwerveDriveMotor{
         virtual double GetVelocity() = 0;
         virtual void SetIdleMode(bool m) = 0;
         virtual bool GetIdleMode() = 0; // just incase if we use motors other than the rev ones that use otehr than the rev stuff. idk 
-
+        virtual double GetPosition() = 0;
 
     private: 
 
