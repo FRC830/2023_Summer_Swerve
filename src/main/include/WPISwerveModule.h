@@ -2,6 +2,7 @@
 #include "Interfaces/SwerveModule.h"
 #include "Interfaces/SwerveDriveMotor.h"
 #include "Interfaces/SwerveTurnMotor.h"
+#include "wrappers/SwerveModulePosition.h"
 
 
 struct SwerveModuleConfig
@@ -21,6 +22,7 @@ class WPISwerveModule : public SwerveModule
         virtual void SetIdleMode(bool idleMode) override;
         virtual bool GetIdleMode() override;
         virtual void Configure(SwerveModuleConfig &config) override;
+        virtual frc::SwerveModulePosition GetPosition();
         virtual frc::SwerveModuleState Optimize(frc::SwerveModuleState desiredState, frc::Rotation2d currentHeading);
 
     private:
