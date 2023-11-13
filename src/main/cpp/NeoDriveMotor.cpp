@@ -1,6 +1,5 @@
 #include "NeoDriveMotor.h"
 
-
 void NeoDriveMotor::Configure(SwerveDriveMotorConfig &config){
     m_encoder = config.encoder;
     m_motorID = config.motorID;
@@ -13,11 +12,18 @@ void NeoDriveMotor::Configure(SwerveDriveMotorConfig &config){
     m_PID->SetFF(config.ff);
     m_motor->SetIdleMode(config.idleMode);
     m_encoder->SetVelocityConversionFactor(config.ratio);
+    m_encoder->SetPositionConversionFactor(config.ratio);
     m_motor->SetSmartCurrentLimit(20);
     m_motor->BurnFlash();
     m_MaxSpeed = config.maxSpeed;
-    
+    m_correction_factor = config.correction_factor;
 };
+
+double NeoDriveMotor::GetPosition()
+{
+    double position = m_encoder->GetPosition() / m_correction_factor;
+    return position;
+}
 
 void NeoDriveMotor::SetVelocity(units::velocity::feet_per_second_t v) {
 

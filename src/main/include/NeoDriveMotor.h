@@ -17,7 +17,7 @@ struct SwerveDriveMotorConfig {
     double ff;
     double ratio;
     units::velocity::meters_per_second_t maxSpeed;
-    
+    double correction_factor;
 
 };
 
@@ -31,7 +31,7 @@ class NeoDriveMotor : public SwerveDriveMotor {
         virtual double GetVelocity() override; 
         virtual void SetIdleMode(bool m) override;
         virtual bool GetIdleMode() override; // just incase if we use motors other than the rev ones that use otehr than the rev stuff. idk 
-
+        virtual double GetPosition() override;
 
 
 
@@ -42,7 +42,7 @@ class NeoDriveMotor : public SwerveDriveMotor {
         rev::SparkMaxRelativeEncoder *m_encoder;
         rev::SparkMaxPIDController *m_PID;
         units::velocity::meters_per_second_t m_MaxSpeed; 
-        
+        double m_correction_factor;
 
 
 

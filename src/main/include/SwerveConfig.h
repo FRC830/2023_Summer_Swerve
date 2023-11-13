@@ -155,3 +155,5 @@ const double CONTROLLER_DEADZONE = 0.05;
 
 const bool IS_DRIVE_IN_COAST = false;
 const bool IS_ROBOT_ORIENTED_DRIVE = false;
+
+const bool POSITION_CORRECTION_FACTOR = 1.0;
