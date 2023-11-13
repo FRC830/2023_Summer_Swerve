@@ -20,7 +20,7 @@ struct WPILIB_DLLEXPORT SwerveModulePosition {
   /**
    * Distance the wheel of a module has traveled
    */
-  units::length::feet distance = units::length::feet{0_m};
+  units::foot_t distance = 0_ft;
 
   /**
    * Angle of the module.

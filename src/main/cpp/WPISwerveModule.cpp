@@ -2,11 +2,6 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <units/length.h>
 
-frc::SwerveModulePosition WPISwerveModule::GetPosition() {
-
-    return {units::length::feet{m_driveMotor->GetDistance()}, m_turnMotor->GetRotation()};
-
-}
 
 
 frc::SwerveModuleState WPISwerveModule::Optimize(frc::SwerveModuleState desiredState, frc::Rotation2d currentHeading){
@@ -59,3 +54,13 @@ bool WPISwerveModule::GetIdleMode()
 {
     return m_driveMotor->GetIdleMode();
 };
+
+
+
+frc::SwerveModulePosition WPISwerveModule::GetPosition() {
+
+
+    double dist = m_driveMotor->GetPosition(); 
+    return {units::foot_t{dist}, m_turnMotor->GetRotation()};
+
+}
