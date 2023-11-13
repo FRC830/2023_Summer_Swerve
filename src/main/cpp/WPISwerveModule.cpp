@@ -57,7 +57,7 @@ bool WPISwerveModule::GetIdleMode()
 
 
 
-frc::SwerveModulePosition WPISwerveModule::GetPosition() {
+frc::SwerveModulePositionNEW WPISwerveModule::GetPosition() {
 
 
     double dist = m_driveMotor->GetPosition(); 

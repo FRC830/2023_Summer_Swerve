@@ -16,7 +16,7 @@ namespace frc {
 /**
  * Represents the position of one swerve module.
  */
-struct WPILIB_DLLEXPORT SwerveModulePosition {
+struct SwerveModulePositionNEW {
   /**
    * Distance the wheel of a module has traveled
    */
@@ -33,9 +33,9 @@ struct WPILIB_DLLEXPORT SwerveModulePosition {
    * @param other The other object.
    * @return Whether the two objects are equal.
    */
-  bool operator==(const SwerveModulePosition& other) const;
+  bool operator==(const SwerveModulePositionNEW& other) const;
 
-  SwerveModulePosition Interpolate(const SwerveModulePosition& endValue,
+  SwerveModulePositionNEW Interpolate(const SwerveModulePositionNEW& endValue,
                                    double t) const {
     return {wpi::Lerp(distance, endValue.distance, t),
             wpi::Lerp(angle, endValue.angle, t)};
