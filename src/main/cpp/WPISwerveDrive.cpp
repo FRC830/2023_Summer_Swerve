@@ -1,4 +1,5 @@
 #include "WPISwerveDrive.h"
+#include "frc/Timer.h"
 
 void WPISwerveDrive::Configure(SwerveConfig &config){
     m_ebrake = config.ebrake;
@@ -16,6 +17,7 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     wpi::array{m_modules[0]->GetPosition(), m_modules[1]->GetPosition(), m_modules[2]->GetPosition(), m_modules[3]->GetPosition()}, frc::Pose2d{});
     m_deadzone = config.deadzone;
     m_gyro = config.gyro;
+    m_estimator = new frc::SwerveDrivePoseEstimator<4>(m_kinematics, m_gyro->GetHeading(), {}, frc::Pose2d(frc::Translation2d(), m_gyro->GetHeading()));
 }
 
 
@@ -37,10 +39,17 @@ void WPISwerveDrive::Drive(double x_position, double y_position, double rotation
 
 void WPISwerveDrive::Drive(units::feet_per_second_t vx, units::feet_per_second_t vy, units::degrees_per_second_t omega) {
 
-    // Drive(frc::ChassisSpeeds{vx, vy, omega});   
-    frc::ChassisSpeeds speeds = frc::ChassisSpeeds::FromFieldRelativeSpeeds(vx, vy, omega, m_gyro->GetHeading());
-    Drive(speeds);
+    if (!m_orientation)
+    {
+        Drive(frc::ChassisSpeeds{vx, vy, omega});   
+    }
+    else
+    {
+        frc::ChassisSpeeds speeds = frc::ChassisSpeeds::FromFieldRelativeSpeeds(vx, vy, omega, m_gyro->GetHeading());
+        Drive(speeds);
+    }
 }
+
 void WPISwerveDrive::Drive(frc::ChassisSpeeds speed) {
     
     // states = m_kinematics.ToSwerveModuleStates(speed);
@@ -61,11 +70,11 @@ void WPISwerveDrive::Drive(frc::ChassisSpeeds speed) {
 void WPISwerveDrive::Drive(std::vector<frc::SwerveModuleState> &state) {
     if (!m_ebrake) {
         for(int i = 0; i < state.size(); i++){
-
             m_modules[i]->SetState(state[i]);
-
         }
     }
+
+    m_estimator->UpdateWithTime(frc::Timer::GetFPGATimestamp(), m_gyro->GetHeading(), {});
 } 
 
 bool WPISwerveDrive::GetIdleMode() {
