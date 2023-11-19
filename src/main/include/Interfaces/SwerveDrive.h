@@ -26,6 +26,9 @@ class SwerveDrive
         virtual void SetRobotOriented() = 0;
         virtual void SetFieldOriented() = 0;
         virtual bool GetOrientedMode() = 0; 
+        virtual frc::Pose2d GetPose() = 0;
+        virtual void ResetPose(frc::Pose2d pose) = 0;
+        virtual frc::ChassisSpeeds GetRobotRelativeSpeeds() = 0;
 
     private:
         

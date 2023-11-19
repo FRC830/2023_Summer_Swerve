@@ -20,7 +20,6 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     m_estimator = new frc::SwerveDrivePoseEstimator<4>(m_kinematics, m_gyro->GetHeading(), {}, frc::Pose2d(frc::Translation2d(), m_gyro->GetHeading()));
 }
 
-
 bool WPISwerveDrive::GetEbrake() {
     return m_ebrake;
 }
@@ -38,7 +37,6 @@ void WPISwerveDrive::Drive(double x_position, double y_position, double rotation
 }
 
 void WPISwerveDrive::Drive(units::feet_per_second_t vx, units::feet_per_second_t vy, units::degrees_per_second_t omega) {
-
     if (!m_orientation)
     {
         Drive(frc::ChassisSpeeds{vx, vy, omega});   
@@ -48,7 +46,7 @@ void WPISwerveDrive::Drive(units::feet_per_second_t vx, units::feet_per_second_t
         frc::ChassisSpeeds speeds = frc::ChassisSpeeds::FromFieldRelativeSpeeds(vx, vy, omega, m_gyro->GetHeading());
         Drive(speeds);
     }
-}
+}   
 
 void WPISwerveDrive::Drive(frc::ChassisSpeeds speed) {
     
@@ -96,6 +94,21 @@ void WPISwerveDrive::SetFieldOriented() {
 }
 bool WPISwerveDrive::GetOrientedMode() {
     return m_orientation;
+}
+
+frc::Pose2d WPISwerveDrive::GetPose()
+{
+    return m_estimator->GetEstimatedPosition();
+}
+
+void WPISwerveDrive::ResetPose(frc::Pose2d pose)
+{
+    m_estimator->ResetPosition(m_gyro->GetHeading(), {}, pose);
+}
+
+frc::ChassisSpeeds WPISwerveDrive::GetRobotRelativeSpeeds()
+{
+    return m_kinematics->ToChassisSpeeds({m_modules[0]->GetState(), m_modules[1]->GetState(), m_modules[2]->GetState(), m_modules[3]->GetState()});
 }
 
 double WPISwerveDrive::ApplyDeadzone(double input)
