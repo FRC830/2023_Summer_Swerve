@@ -39,10 +39,17 @@ void WPISwerveDrive::Drive(double x_position, double y_position, double rotation
 
 void WPISwerveDrive::Drive(units::feet_per_second_t vx, units::feet_per_second_t vy, units::degrees_per_second_t omega) {
 
-    // Drive(frc::ChassisSpeeds{vx, vy, omega});   
-    frc::ChassisSpeeds speeds = frc::ChassisSpeeds::FromFieldRelativeSpeeds(vx, vy, omega, m_gyro->GetHeading());
-    Drive(speeds);
+    if (!m_orientation)
+    {
+        Drive(frc::ChassisSpeeds{vx, vy, omega});   
+    }
+    else
+    {
+        frc::ChassisSpeeds speeds = frc::ChassisSpeeds::FromFieldRelativeSpeeds(vx, vy, omega, m_gyro->GetHeading());
+        Drive(speeds);
+    }
 }
+
 void WPISwerveDrive::Drive(frc::ChassisSpeeds speed) {
     
     // states = m_kinematics.ToSwerveModuleStates(speed);
