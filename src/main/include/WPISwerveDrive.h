@@ -2,6 +2,9 @@
 #include "Interfaces/SwerveDrive.h"
 #include "Interfaces/SwerveModule.h"
 #include "Interfaces/SwerveGyro.h"
+
+
+
 #include "frc/estimator/SwerveDrivePoseEstimator.h"
 #include "frc/geometry/Pose2d.h"
 #include <array>
@@ -60,7 +63,13 @@ class WPISwerveDrive : public SwerveDrive
         std::array<SwerveModule*, 4> m_modules;
 
         std::vector<frc::SwerveModuleState> m_states;
-        
+
+
+        frc::SwerveDriveOdometry<4>* m_odometry;
+
+
+
+
         double m_maxDriveSpeed;
         double m_maxTurnSpeed;
         bool m_ebrake = false;

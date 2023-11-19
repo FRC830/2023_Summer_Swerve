@@ -39,7 +39,7 @@ void WPISwerveModule::SetState(frc::SwerveModuleState state)
 frc::SwerveModuleState WPISwerveModule::GetState() 
 {
     frc::Rotation2d angle = m_turnMotor->GetRotation();
-    double speed = m_driveMotor->GetVelocity();
+    auto speed = m_driveMotor->GetVelocity();
     frc::SwerveModuleState state{units::meters_per_second_t(units::feet_per_second_t(speed)),angle};
     return state;
 };
@@ -57,10 +57,10 @@ bool WPISwerveModule::GetIdleMode()
 
 
 
-frc::SwerveModulePositionNEW WPISwerveModule::GetPosition() {
+frc::SwerveModulePosition WPISwerveModule::GetPosition() {
 
 
-    double dist = m_driveMotor->GetPosition(); 
-    return {units::foot_t{dist}, m_turnMotor->GetRotation()};
+    auto dist = m_driveMotor->GetPosition(); 
+    return {units::meter_t{dist}, m_turnMotor->GetRotation()};
 
 }

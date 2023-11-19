@@ -12,30 +12,30 @@ void NeoDriveMotor::Configure(SwerveDriveMotorConfig &config){
     m_PID->SetFF(config.ff);
     m_motor->SetIdleMode(config.idleMode);
     m_encoder->SetVelocityConversionFactor(config.ratio);
-    m_encoder->SetPositionConversionFactor(config.ratio);
+    m_encoder->SetPositionConversionFactor(config.ratio * 60);
     m_motor->SetSmartCurrentLimit(20);
     m_motor->BurnFlash();
     m_MaxSpeed = config.maxSpeed;
     m_correction_factor = config.correction_factor;
 };
 
-double NeoDriveMotor::GetPosition()
+units::foot_t NeoDriveMotor::GetPosition()
 {
-    double position = m_encoder->GetPosition() / m_correction_factor;
-    return position;
+    auto position = (m_encoder->GetPosition())  / m_correction_factor;
+    return units::foot_t{position};
 }
 
 void NeoDriveMotor::SetVelocity(units::velocity::feet_per_second_t v) {
 
 
     // TODO - return PID to not need a scaling factor to get to desired setpoint
-    m_PID->SetReference( 1.6666667 * v.to<double>(), rev::CANSparkMax::ControlType::kVelocity);
+    m_PID->SetReference(1.6666667 * v.to<double>(), rev::CANSparkMax::ControlType::kVelocity);
 
 };
 
 
-double NeoDriveMotor::GetVelocity() {
-    return m_encoder->GetVelocity();
+units::velocity::feet_per_second_t NeoDriveMotor::GetVelocity() {
+    return  units::velocity::feet_per_second_t{m_encoder->GetVelocity()};
 
 };
 
