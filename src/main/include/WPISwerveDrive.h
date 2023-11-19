@@ -65,7 +65,6 @@ class WPISwerveDrive : public SwerveDrive
         std::vector<frc::SwerveModuleState> m_states;
 
 
-        frc::SwerveDriveOdometry<4>* m_odometry;
 
 
 
