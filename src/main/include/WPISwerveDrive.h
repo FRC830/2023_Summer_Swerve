@@ -2,7 +2,8 @@
 #include "Interfaces/SwerveDrive.h"
 #include "Interfaces/SwerveModule.h"
 #include "Interfaces/SwerveGyro.h"
-
+#include "frc/estimator/SwerveDrivePoseEstimator.h"
+#include "frc/geometry/Pose2d.h"
 #include <array>
 
 struct SwerveConfig{
@@ -38,6 +39,7 @@ class WPISwerveDrive : public SwerveDrive
         virtual void SetRobotOriented() override;
         virtual void SetFieldOriented() override;
         virtual bool GetOrientedMode() override; 
+        
 
         inline std::array<SwerveModule*, 4>* GetModules()
         {
@@ -67,4 +69,5 @@ class WPISwerveDrive : public SwerveDrive
 
         double ApplyDeadzone(double input);
         SwerveGyro *m_gyro;
+        frc::SwerveDrivePoseEstimator<4> *m_estimator;
 };

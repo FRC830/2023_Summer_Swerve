@@ -1,4 +1,5 @@
 #include "WPISwerveDrive.h"
+#include "frc/Timer.h"
 
 void WPISwerveDrive::Configure(SwerveConfig &config){
     m_ebrake = config.ebrake;
@@ -16,6 +17,7 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     m_backRightLocation);
     m_deadzone = config.deadzone;
     m_gyro = config.gyro;
+    m_estimator = new frc::SwerveDrivePoseEstimator<4>(m_kinematics, m_gyro->GetHeading(), {}, frc::Pose2d(frc::Translation2d(), m_gyro->GetHeading()));
 }
 
 
@@ -61,11 +63,11 @@ void WPISwerveDrive::Drive(frc::ChassisSpeeds speed) {
 void WPISwerveDrive::Drive(std::vector<frc::SwerveModuleState> &state) {
     if (!m_ebrake) {
         for(int i = 0; i < state.size(); i++){
-
             m_modules[i]->SetState(state[i]);
-
         }
     }
+
+    m_estimator->UpdateWithTime(frc::Timer::GetFPGATimestamp(), m_gyro->GetHeading(), {});
 } 
 
 bool WPISwerveDrive::GetIdleMode() {
