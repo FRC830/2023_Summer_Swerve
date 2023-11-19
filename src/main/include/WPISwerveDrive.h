@@ -3,6 +3,8 @@
 #include "Interfaces/SwerveModule.h"
 #include "Interfaces/SwerveGyro.h"
 
+
+
 #include <array>
 
 struct SwerveConfig{
@@ -55,7 +57,13 @@ class WPISwerveDrive : public SwerveDrive
         std::array<SwerveModule*, 4> m_modules;
 
         std::vector<frc::SwerveModuleState> m_states;
-        
+
+
+        frc::SwerveDriveOdometry<4>* m_odometry;
+
+
+
+
         double m_maxDriveSpeed;
         double m_maxTurnSpeed;
         bool m_ebrake = false;
