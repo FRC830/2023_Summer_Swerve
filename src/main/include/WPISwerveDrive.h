@@ -7,6 +7,8 @@
 
 #include "frc/estimator/SwerveDrivePoseEstimator.h"
 #include "frc/geometry/Pose2d.h"
+#include <frc/smartdashboard/Field2d.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 #include <array>
 
 struct SwerveConfig{
@@ -53,6 +55,7 @@ class WPISwerveDrive : public SwerveDrive
         }
 
     private:
+        frc::Field2d m_field;
         frc::Translation2d m_frontLeftLocation;
         frc::Translation2d m_frontRightLocation;
         frc::Translation2d m_backLeftLocation;

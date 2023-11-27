@@ -2,6 +2,7 @@
 #include "frc/Timer.h"
 
 void WPISwerveDrive::Configure(SwerveConfig &config){
+    frc::SmartDashboard::PutData("Field", &m_field);
     m_ebrake = config.ebrake;
     m_maxDriveSpeed = config.maxDriveSpeed;
     m_maxTurnSpeed = config.maxTurnSpeed;
@@ -15,7 +16,9 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     m_kinematics = new frc::SwerveDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
     m_deadzone = config.deadzone;
     m_gyro = config.gyro;
-    m_estimator = new frc::SwerveDrivePoseEstimator<4>(*m_kinematics, m_gyro->GetRawHeading(), {m_modules[0]->GetPosition(), m_modules[1]->GetPosition(), m_modules[2]->GetPosition(), m_modules[3]->GetPosition()}, frc::Pose2d(frc::Translation2d(), m_gyro->GetRawHeading()));
+    //Last parameter in constuer must be relative the actual robot for it to wrok some what correctly
+    //REMEMEBR TO FLIP DIRECTION DURING AUTON MAKING
+    m_estimator = new frc::SwerveDrivePoseEstimator<4>(*m_kinematics, m_gyro->GetRawHeading(), {m_modules[0]->GetPosition(), m_modules[1]->GetPosition(), m_modules[2]->GetPosition(), m_modules[3]->GetPosition()}, frc::Pose2d(frc::Translation2d(), m_gyro->GetHeading()));
 }
 
 bool WPISwerveDrive::GetEbrake() {
@@ -70,7 +73,18 @@ void WPISwerveDrive::Drive(std::vector<frc::SwerveModuleState> &state) {
         }
     }
 
+    // frc::SmartDashboard::PutNumber("Degrees Of Gyro from RAW", m_gyro->GetRawHeading().Degrees().to<double>());
+
+    // frc::SmartDashboard::PutNumber("Degrees Of Gyro from Processed", m_gyro->GetRawHeading().Degrees().to<double>());
+
+    // frc::SmartDashboard::PutNumber("")
+
+    // frc::SmartDashboard::PutData("Rotation2d", )
+
+    
+
     m_estimator->UpdateWithTime(frc::Timer::GetFPGATimestamp(), m_gyro->GetRawHeading(), {m_modules[0]->GetPosition(), m_modules[1]->GetPosition(), m_modules[2]->GetPosition(), m_modules[3]->GetPosition()});
+    m_field.SetRobotPose(m_estimator->GetEstimatedPosition());
 } 
 
 bool WPISwerveDrive::GetIdleMode() {
