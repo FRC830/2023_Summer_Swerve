@@ -15,7 +15,7 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     m_kinematics = new frc::SwerveDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
     m_deadzone = config.deadzone;
     m_gyro = config.gyro;
-    m_estimator = new frc::SwerveDrivePoseEstimator<4>(*m_kinematics, m_gyro->GetHeading(), {m_modules[0]->GetPosition(), m_modules[1]->GetPosition(), m_modules[2]->GetPosition(), m_modules[3]->GetPosition()}, frc::Pose2d(frc::Translation2d(), m_gyro->GetHeading()));
+    m_estimator = new frc::SwerveDrivePoseEstimator<4>(*m_kinematics, m_gyro->GetRawHeading(), {m_modules[0]->GetPosition(), m_modules[1]->GetPosition(), m_modules[2]->GetPosition(), m_modules[3]->GetPosition()}, frc::Pose2d(frc::Translation2d(), m_gyro->GetRawHeading()));
 }
 
 bool WPISwerveDrive::GetEbrake() {
@@ -41,7 +41,7 @@ void WPISwerveDrive::Drive(units::feet_per_second_t vx, units::feet_per_second_t
     }
     else
     {
-        frc::ChassisSpeeds speeds = frc::ChassisSpeeds::FromFieldRelativeSpeeds(vx, vy, omega, m_gyro->GetHeading());
+        frc::ChassisSpeeds speeds = frc::ChassisSpeeds::FromFieldRelativeSpeeds(vx, vy, omega, m_gyro->GetRawHeading());
         Drive(speeds);
     }
 }   
@@ -70,7 +70,7 @@ void WPISwerveDrive::Drive(std::vector<frc::SwerveModuleState> &state) {
         }
     }
 
-    m_estimator->UpdateWithTime(frc::Timer::GetFPGATimestamp(), m_gyro->GetHeading(), {m_modules[0]->GetPosition(), m_modules[1]->GetPosition(), m_modules[2]->GetPosition(), m_modules[3]->GetPosition()});
+    m_estimator->UpdateWithTime(frc::Timer::GetFPGATimestamp(), m_gyro->GetRawHeading(), {m_modules[0]->GetPosition(), m_modules[1]->GetPosition(), m_modules[2]->GetPosition(), m_modules[3]->GetPosition()});
 } 
 
 bool WPISwerveDrive::GetIdleMode() {
@@ -101,7 +101,7 @@ frc::Pose2d WPISwerveDrive::GetPose()
 
 void WPISwerveDrive::ResetPose(frc::Pose2d pose)
 {
-    m_estimator->ResetPosition(m_gyro->GetHeading(), {m_modules[0]->GetPosition(), m_modules[1]->GetPosition(), m_modules[2]->GetPosition(), m_modules[3]->GetPosition()}, pose);
+    m_estimator->ResetPosition(m_gyro->GetRawHeading(), {m_modules[0]->GetPosition(), m_modules[1]->GetPosition(), m_modules[2]->GetPosition(), m_modules[3]->GetPosition()}, pose);
 }
 
 frc::ChassisSpeeds WPISwerveDrive::GetRobotRelativeSpeeds()
