@@ -18,6 +18,7 @@
 #include "NavXGyro.h"
 #include <array>
 #include <frc/XboxController.h>
+#include <frc2/command/CommandPtr.h>
 
 class Robot : public frc::TimedRobot {
  public:

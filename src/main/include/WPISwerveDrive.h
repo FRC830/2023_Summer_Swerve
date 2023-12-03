@@ -2,14 +2,14 @@
 #include "Interfaces/SwerveDrive.h"
 #include "Interfaces/SwerveModule.h"
 #include "Interfaces/SwerveGyro.h"
-
-
-
 #include "frc/estimator/SwerveDrivePoseEstimator.h"
 #include "frc/geometry/Pose2d.h"
 #include <frc/smartdashboard/Field2d.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <array>
+#include "pathplanner/lib/commands/PPSwerveControllerCommand.h"
+#include "pathplanner/lib/auto/SwerveAutoBuilder.h"
+#include "pathplanner/lib/PathPlanner.h"
 
 struct SwerveConfig{
     bool idle_mode;
@@ -67,11 +67,6 @@ class WPISwerveDrive : public SwerveDrive
 
         std::vector<frc::SwerveModuleState> m_states;
 
-
-
-
-
-
         double m_maxDriveSpeed;
         double m_maxTurnSpeed;
         bool m_ebrake = false;
@@ -84,4 +79,5 @@ class WPISwerveDrive : public SwerveDrive
         double ApplyDeadzone(double input);
         SwerveGyro *m_gyro;
         frc::SwerveDrivePoseEstimator<4> *m_estimator;
+        pathplanner::SwerveAutoBuilder *m_autoBuilder;
 };
