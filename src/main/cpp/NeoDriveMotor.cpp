@@ -21,7 +21,7 @@ void NeoDriveMotor::Configure(SwerveDriveMotorConfig &config){
 
 units::foot_t NeoDriveMotor::GetPosition()
 {
-    auto position = (m_encoder->GetPosition())  / m_correction_factor;
+    double position = (m_encoder->GetPosition())  / m_correction_factor;
     return units::foot_t{position};
 }
 

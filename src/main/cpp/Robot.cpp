@@ -84,26 +84,29 @@ void Robot::SwerveInit(){
   drive_config.d = DRIVE_D;
   drive_config.ff = DRIVE_FF;
   drive_config.ratio = MOTOR_ROT_TO_FT / 60.0;
-  drive_config.correction_factor = POSITION_CORRECTION_FACTOR;
   
   drive_config.PID = &fl_drive_pid;
   drive_config.encoder = &fl_drive_enc;
   drive_config.motor = &fl_drive_mtr;
+  drive_config.correction_factor = FL_POSITION_CORRECTION_FACTOR;
   _drive_motors[ModulePosition::FL].Configure(drive_config);
 
   drive_config.PID = &fr_drive_pid;
   drive_config.encoder = &fr_drive_enc;
   drive_config.motor = &fr_drive_mtr;
+  drive_config.correction_factor = FR_POSITION_CORRECTION_FACTOR;
   _drive_motors[ModulePosition::FR].Configure(drive_config);
 
   drive_config.PID = &bl_drive_pid;
   drive_config.encoder = &bl_drive_enc;
   drive_config.motor = &bl_drive_mtr;
+  drive_config.correction_factor = BL_POSITION_CORRECTION_FACTOR;
   _drive_motors[ModulePosition::BL].Configure(drive_config);
 
   drive_config.PID = &br_drive_pid;
   drive_config.encoder = &br_drive_enc;
   drive_config.motor = &br_drive_mtr;
+  drive_config.correction_factor = BR_POSITION_CORRECTION_FACTOR;
   _drive_motors[ModulePosition::BR].Configure(drive_config);
 
 
@@ -140,7 +143,7 @@ void Robot::SwerveInit(){
     (*temp)[i] = &_modules[i];
   }
   _swerve.Configure(swerveConfig);
-
+  _swerve.SetFieldOriented();
 }
 
 void Robot::RobotInit() {
@@ -324,12 +327,19 @@ void Robot::TeleopInit()
 }
 
 void Robot::TeleopPeriodic() 
-{
+{ 
   // TEMPORARY - for finding conversion factor
   frc::SmartDashboard::PutNumber("FL Drive Motor Rotations", fl_drive_enc.GetPosition());
   frc::SmartDashboard::PutNumber("FR Drive Motor Rotations", fr_drive_enc.GetPosition());
   frc::SmartDashboard::PutNumber("BR Drive Motor Rotations", br_drive_enc.GetPosition());
   frc::SmartDashboard::PutNumber("BL Drive Motor Rotations", bl_drive_enc.GetPosition());
+
+  // TEMPORARY
+  frc::SmartDashboard::PutNumber("Pose X", _swerve.GetPose().Translation().X().to<double>());
+  frc::SmartDashboard::PutNumber("Pose Y", _swerve.GetPose().Translation().Y().to<double>());
+  frc::SmartDashboard::PutNumber("Pose Rotation", _swerve.GetPose().Rotation().Degrees().to<double>());
+
+
 
   // //m_back_left_turn_motor.SetRotation(frc::Rotation2d(static_cast<units::degree_t>(frc::SmartDashboard::GetNumber("backleft turn motor position", 69))));
   // //std::cout << "\rCurrent motor heading/positon:\t" << static_cast<double>(m_back_left_analog_encoder.GetHeading().Degrees()) << "\tsoftware motor positon" << frc::SmartDashboard::GetNumber("backleft turn motor position", 69);
