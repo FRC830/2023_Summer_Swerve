@@ -52,4 +52,6 @@ class Robot : public frc::TimedRobot {
   frc::XboxController _xbox_controller{0};
 
   NavXGyro _gyro;
+  // frc2::CommandPtr m_commandptr;
+  int m_state;
 };
