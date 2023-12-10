@@ -19,6 +19,7 @@
 #include <array>
 #include <frc/XboxController.h>
 #include <frc2/command/CommandPtr.h>
+#include <memory>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -52,6 +53,7 @@ class Robot : public frc::TimedRobot {
   frc::XboxController _xbox_controller{0};
 
   NavXGyro _gyro;
-  // frc2::CommandPtr m_commandptr;
   int m_state;
+  std::vector<pathplanner::PathPlannerTrajectory> m_trajectory;
+  std::unique_ptr<frc2::CommandPtr> m_command_ptr;
 };

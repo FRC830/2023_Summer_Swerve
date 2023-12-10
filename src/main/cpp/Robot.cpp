@@ -181,17 +181,39 @@ void Robot::AutonomousInit() {
   // m_autoSelected = SmartDashboard::GetString("Auto Selector",
   //     kAutoNameDefault);
   fmt::print("Auto selected: {}\n", m_autoSelected);
-  std::vector<pathplanner::PathPlannerTrajectory> trajectory = pathplanner::PathPlanner::loadPathGroup("test_path", {pathplanner::PathConstraints{5_mps, 3.5_mps_sq}});
-  // m_commandptr = _swerve.GetAutoBuilder()->fullAuto(trajectory);
+  m_trajectory = pathplanner::PathPlanner::loadPathGroup("test_path", {pathplanner::PathConstraints{5_mps, 3.5_mps_sq}});
+  m_command_ptr = std::make_unique<frc2::CommandPtr>(_swerve.GetAutoBuilder()->fullAuto(m_trajectory));
+  // m_commandptr = std::move(_swerve.GetAutoBuilder()->fullAuto(trajectory));
   m_state = 0;
   if (m_autoSelected == kAutoNameCustom) {
-    // Custom Auto goes here
+    // Custom Auto goes here)
   } else {
     // Default Auto goes here
   }
 }
 
 void Robot::AutonomousPeriodic() {
+  // auto command = _swerve.GetAutoBuilder();
+
+  switch (m_state)
+  {
+    case 0:
+      m_command_ptr->get()->Initialize();
+      ++m_state;
+      break;
+    case 1:
+      m_command_ptr->get()->Execute();
+      if (m_command_ptr->get()->IsFinished())
+      {
+        ++m_state;
+      }
+    case 2:
+      m_command_ptr->get()->End(false);
+      ++m_state;
+    case 3:
+    default:
+      break;
+  }
 }
 
 void Robot::TeleopInit() 
