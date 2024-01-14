@@ -1,11 +1,12 @@
 #pragma once
 
-#include <frc/AnalogEncoder.h>
+#include <CTRE/phoenix/sensors/CANCoder.h>
 #include <frc/geometry/Rotation2d.h>
 #include <frc/geometry/Translation2d.h>
 // #include <AHRS.h>
 
 #include "rev/CANSparkMax.h"
+
 
 // ###########################################################
 // #                  Front Left Module                      #
@@ -67,7 +68,7 @@ const int BL_ABS_ENC_PORT = 2;
 const bool BL_ABS_ENC_INVERTED = false;
 const frc::Rotation2d BL_ZERO_HEADING{units::degree_t{0.0f}};
 
-frc::AnalogEncoder bl_abs_enc{BL_ABS_ENC_PORT};
+ctre::phoenix::sensors::CANCoder bl_abs_enc{BL_ABS_ENC_PORT};
 
 
 // -----------------------Turn Motor--------------------------

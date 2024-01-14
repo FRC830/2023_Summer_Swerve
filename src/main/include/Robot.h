@@ -8,7 +8,7 @@
 
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
-#include "AnalogAbsoluteEncoder.h"
+#include "AbsoluteEncoder.h"
 #include "NeoTurnMotor.h"
 #include "NeoDriveMotor.h"
 #include "WPISwerveModule.h"
@@ -37,10 +37,10 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
-  AnalogAbsoluteEncoder m_back_left_analog_encoder;
+  AbsoluteEncoder m_back_left_analog_encoder;
   NeoTurnMotor m_back_left_turn_motor;
   NavXGyro gyro;
-  AnalogAbsoluteEncoder m_ABSencoder;
+  AbsoluteEncoder m_ABSencoder;
   NeoTurnMotor m_turnMotor;
   NeoDriveMotor m_driveMotor;
   WPISwerveModule m_swerveModule_BL;
