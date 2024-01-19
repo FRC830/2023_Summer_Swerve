@@ -21,7 +21,7 @@ frc::Rotation2d AnalogAbsoluteEncoder::GetHeading()
 
 frc::Rotation2d AnalogAbsoluteEncoder::GetRawHeading()
 { 
-    double degrees = m_encoder->GetAbsolutePosition() * 360.0f;
+    double degrees = m_encoder->GetAbsolutePosition();
     if (m_is_inverted)
     {
         degrees = std::abs(360.0f - degrees);

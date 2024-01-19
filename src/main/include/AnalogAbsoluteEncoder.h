@@ -1,10 +1,10 @@
 #pragma once
 #include "Interfaces/SwerveAbsoluteEncoder.h"
-#include <frc/AnalogEncoder.h>
+#include <CTRE/phoenix/sensors/CANCoder.h>
 
 struct AbsoluteEncoderConfig
 {
-    frc::AnalogEncoder *encoder;
+    ctre::phoenix::sensors::CANCoder *encoder;
     bool is_inverted;
     frc::Rotation2d zero_heading;
 };
@@ -22,7 +22,7 @@ class AnalogAbsoluteEncoder : public SwerveAbsoluteEncoder
         virtual void SetZeroHeading(frc::Rotation2d zero_heading) override;
         
     private:
-        frc::AnalogEncoder *m_encoder;
+        ctre::phoenix::sensors::CANCoder *m_encoder;
         bool m_is_inverted;
         frc::Rotation2d m_zero_heading;
 };

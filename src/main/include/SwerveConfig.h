@@ -4,6 +4,7 @@
 #include <frc/geometry/Rotation2d.h>
 #include <frc/geometry/Translation2d.h>
 // #include <AHRS.h>
+#include <CTRE/phoenix/sensors/CANCoder.h>
 
 #include "rev/CANSparkMax.h"
 
@@ -15,7 +16,7 @@ const int FL_ABS_ENC_PORT = 1;
 const bool FL_ABS_ENC_INVERTED = false;
 const frc::Rotation2d FL_ZERO_HEADING{units::degree_t{221.7f}};
 
-frc::AnalogEncoder fl_abs_enc{FL_ABS_ENC_PORT};
+ctre::phoenix::sensors::CANCoder fl_abs_enc{FL_ABS_ENC_PORT};
 
 // -----------------------Turn Motor--------------------------
 const int FL_TURN_MTR_ID = 2;
@@ -42,7 +43,7 @@ const int FR_ABS_ENC_PORT = 0;
 const bool FR_ABS_ENC_INVERTED = false;
 const frc::Rotation2d FR_ZERO_HEADING{units::degree_t{29.9f}};
 
-frc::AnalogEncoder fr_abs_enc{FR_ABS_ENC_PORT};
+ctre::phoenix::sensors::CANCoder fr_abs_enc{FR_ABS_ENC_PORT};
 
 // -----------------------Turn Motor--------------------------
 const int FR_TURN_MTR_ID = 1;
@@ -69,7 +70,7 @@ const int BL_ABS_ENC_PORT = 2;
 const bool BL_ABS_ENC_INVERTED = false;
 const frc::Rotation2d BL_ZERO_HEADING{units::degree_t{121.1f}};
 
-frc::AnalogEncoder bl_abs_enc{BL_ABS_ENC_PORT};
+ctre::phoenix::sensors::CANCoder bl_abs_enc{BL_ABS_ENC_PORT};
 
 
 // -----------------------Turn Motor--------------------------
@@ -97,7 +98,7 @@ const int BR_ABS_ENC_PORT = 3;
 const bool BR_ABS_ENC_INVERTED = false;
 const frc::Rotation2d BR_ZERO_HEADING{units::degree_t{255.5f}};
 
-frc::AnalogEncoder br_abs_enc{BR_ABS_ENC_PORT};
+ctre::phoenix::sensors::CANCoder br_abs_enc{BR_ABS_ENC_PORT};
 
 // -----------------------Turn Motor--------------------------
 const int BR_TURN_MTR_ID = 3;

@@ -411,10 +411,10 @@ void Robot::TeleopPeriodic()
   frc::SmartDashboard::PutNumber("Gyro Heading", _gyro.GetHeading().Degrees().to<double>());
 
   // Heading of turn motors
-  frc::SmartDashboard::PutNumber("FL Heading", fl_turn_enc.GetPosition());
-  frc::SmartDashboard::PutNumber("FR Heading", fr_turn_enc.GetPosition());
-  frc::SmartDashboard::PutNumber("BL Heading", bl_turn_enc.GetPosition());
-  frc::SmartDashboard::PutNumber("BR Heading", br_turn_enc.GetPosition());
+  frc::SmartDashboard::PutNumber("FL Heading", double(_abs_encoders[0].GetHeading().Degrees()));
+  frc::SmartDashboard::PutNumber("FR Heading", double(_abs_encoders[1].GetHeading().Degrees()));
+  frc::SmartDashboard::PutNumber("BL Heading", double(_abs_encoders[2].GetHeading().Degrees()));
+  frc::SmartDashboard::PutNumber("BR Heading", double(_abs_encoders[3].GetHeading().Degrees()));
 
   // Velocity of drive motors
   frc::SmartDashboard::PutNumber("FL Velocity", fl_drive_enc.GetVelocity());
