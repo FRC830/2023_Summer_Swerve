@@ -20,6 +20,7 @@
 #include <frc/XboxController.h>
 #include <frc2/command/CommandPtr.h>
 #include <memory>
+#include <pathplanner/lib/commands/PathPlannerAuto.h>
 
 class Robot : public frc::TimedRobot {
  public:
