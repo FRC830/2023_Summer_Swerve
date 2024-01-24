@@ -22,14 +22,32 @@ void WPISwerveDrive::Configure(SwerveConfig &config){
     //REMEMEBR TO FLIP DIRECTION DURING AUTON MAKING
     m_estimator = new frc::SwerveDrivePoseEstimator<4>(*m_kinematics, m_gyro->GetRawHeading(), {m_modules[0]->GetPosition(), m_modules[1]->GetPosition(), m_modules[2]->GetPosition(), m_modules[3]->GetPosition()}, frc::Pose2d(frc::Translation2d(), m_gyro->GetHeading()));
     std::unordered_map<std::string, std::shared_ptr<frc2::Command>> eventMap;
-    m_autoBuilder = new pathplanner::SwerveAutoBuilder(
+    pathplanner::AutoBuilder::configureHolonomic(
         [this]() {return GetPose();},
         [this](frc::Pose2d InitPose)  {ResetPose(InitPose);},
-        pathplanner::PIDConstants(1.0, 0.0, 0.0),
-        pathplanner::PIDConstants(1.0, 0.0, 0.0),
+        [this](){return GetRobotRelativeSpeeds(); },
         [this](frc::ChassisSpeeds speeds) {Drive(speeds);},
-        eventMap, 
-        {nullptr}, true
+        pathplanner::HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
+            pathplanner::PIDConstants(1.0, 0.0, 0.0), // Translation PID constants
+            pathplanner::PIDConstants(1.0, 0.0, 0.0), // Rotation PID constants
+            4.5_mps, // Max module speed, in m/s
+            0.4_m, // Drive base radius in meters. Distance from robot center to furthest module.
+            pathplanner::ReplanningConfig() // Default path replanning config. See the API for the options here
+        ),
+
+        []() {
+            // Boolean supplier that controls when the path will be mirrored for the red alliance
+            // This will flip the path being followed to the red side of the field.
+            // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+            auto alliance = frc::DriverStation::GetAlliance();
+            if (alliance) {
+                return alliance.value() == frc::DriverStation::Alliance::kRed;
+            }
+            return false;
+        },
+
+        {nullptr}
     );
 }
 

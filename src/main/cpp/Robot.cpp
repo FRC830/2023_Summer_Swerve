@@ -181,9 +181,8 @@ void Robot::AutonomousInit() {
   // m_autoSelected = SmartDashboard::GetString("Auto Selector",
   //     kAutoNameDefault);
   fmt::print("Auto selected: {}\n", m_autoSelected);
-  m_trajectory = pathplanner::PathPlanner::loadPathGroup("test_path", {pathplanner::PathConstraints{5_mps, 3.5_mps_sq}});
   std::cout << "Trajectory size: " << m_trajectory.size() << std::endl;
-  m_command_ptr = std::make_unique<frc2::CommandPtr>(_swerve.GetAutoBuilder()->fullAuto(m_trajectory));
+  m_command_ptr = std::make_unique<frc2::CommandPtr>(pathplanner::PathPlannerAuto("example").ToPtr());
   // m_commandptr = std::move(_swerve.GetAutoBuilder()->fullAuto(trajectory));
   m_state = 0;
   if (m_autoSelected == kAutoNameCustom) {

@@ -7,9 +7,13 @@
 #include <frc/smartdashboard/Field2d.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <array>
-#include "pathplanner/lib/commands/PPSwerveControllerCommand.h"
-#include "pathplanner/lib/auto/SwerveAutoBuilder.h"
-#include "pathplanner/lib/PathPlanner.h"
+#include <pathplanner/lib/auto/AutoBuilder.h>
+#include <pathplanner/lib/util/HolonomicPathFollowerConfig.h>
+#include <pathplanner/lib/util/PIDConstants.h>
+#include <pathplanner/lib/util/ReplanningConfig.h>
+#include <frc/geometry/Pose2d.h>
+#include <frc/kinematics/ChassisSpeeds.h>
+#include <frc/DriverStation.h>
 
 struct SwerveConfig{
     bool idle_mode;
@@ -47,11 +51,6 @@ class WPISwerveDrive : public SwerveDrive
         virtual frc::Pose2d GetPose() override;
         virtual void ResetPose(frc::Pose2d pose) override;
         virtual frc::ChassisSpeeds GetRobotRelativeSpeeds() override;
-        inline pathplanner::SwerveAutoBuilder *GetAutoBuilder()
-        {
-            return m_autoBuilder;
-        }
-
 
         inline std::array<SwerveModule*, 4>* GetModules()
         {
@@ -83,5 +82,4 @@ class WPISwerveDrive : public SwerveDrive
         double ApplyDeadzone(double input);
         SwerveGyro *m_gyro;
         frc::SwerveDrivePoseEstimator<4> *m_estimator;
-        pathplanner::SwerveAutoBuilder *m_autoBuilder;
 };

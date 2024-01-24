@@ -1,4 +1,5 @@
 #include "AnalogAbsoluteEncoder.h"
+#include <units/angle.h>
 
 void AnalogAbsoluteEncoder::Configure(AbsoluteEncoderConfig &config)
 {
@@ -21,7 +22,7 @@ frc::Rotation2d AnalogAbsoluteEncoder::GetHeading()
 
 frc::Rotation2d AnalogAbsoluteEncoder::GetRawHeading()
 { 
-    double degrees = m_encoder->GetAbsolutePosition();
+    double degrees = m_encoder->GetAbsolutePosition().GetValueAsDouble();
     if (m_is_inverted)
     {
         degrees = std::abs(360.0f - degrees);
