@@ -3,7 +3,6 @@
 #include "Interfaces/SwerveModule.h"
 #include "Interfaces/SwerveGyro.h"
 #include "frc/estimator/SwerveDrivePoseEstimator.h"
-#include "frc/geometry/Pose2d.h"
 #include <frc/smartdashboard/Field2d.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <array>

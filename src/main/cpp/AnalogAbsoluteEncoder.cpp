@@ -1,5 +1,4 @@
 #include "AnalogAbsoluteEncoder.h"
-#include <units/angle.h>
 
 void AnalogAbsoluteEncoder::Configure(AbsoluteEncoderConfig &config)
 {
